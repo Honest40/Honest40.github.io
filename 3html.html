@@ -1,44 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HB Graphics Zambia | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* General Page Styling */
-    body {
-      background-color: #f9f9f9;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Header and Logo */
-    header {
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    header .logo img {
-      width: 380px;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-
-    header h1 {
-      font-size: 2rem;
-      color: #c00;
-      margin-top: 10px;
-    }
-
-    /* Gallery Section */
-    .portfolio {
-      text-align: center;
-      padding: 20px;
-    }
-
+    /* Centering and responsive gallery styling */
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -50,7 +18,7 @@
     .gallery img {
       width: 220px;
       height: 220px;
-      object-fit: cover;
+      object-fit: cover; /* keeps all images uniform without distortion */
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -61,23 +29,31 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Responsive for mobile screens */
     @media (max-width: 768px) {
       .gallery img {
-        width: 45%;
-        height: auto;
-      }
-
-      header .logo img {
-        width: 280px;
-      }
-
-      header h1 {
-        font-size: 1.6rem;
+        width: 150px;
+        height: 150px;
       }
     }
 
-    /* Footer */
+    header .logo img {
+      width: 300px;
+      height: auto;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #c00;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -85,14 +61,18 @@
       color: white;
       margin-top: 30px;
     }
+
+    h2,
+    p {
+      text-align: center;
+    }
   </style>
 </head>
-
 <body>
   <header>
     <nav>
       <div class="logo">
-        <img src="images/logo.png" alt="HB Graphics Logo">
+        <img src="logo.png.jpeg" alt="HB Graphics Logo" />
         <h1>HB Graphics Zambia</h1>
       </div>
     </nav>
@@ -102,21 +82,21 @@
     <h2>Our Portfolio</h2>
     <p>Here are some of the samples:</p>
     <div class="gallery">
-      <img src="images/sample1.jpg" alt="Logo Design">
-      <img src="images/sample2.jpg.jpg" alt="T-Shirt Design">
-      <img src="images/sample3.jpg" alt="Vehicle Branding">
-      <img src="images/sample4.jpg" alt="Office Branding">
-      <img src="images/sample5.jpg" alt="Embroidery">
-      <img src="images/sample6.jpg" alt="Backdrop">
-      <img src="images/sample7.jpg" alt="Canvas Print">
-      <img src="images/sample8.jpg" alt="Flyer Design">
-      <img src="images/sample9.jpg" alt="Vector Design">
-      <img src="images/sample10.jpg" alt="Pull-up Banner">
-      <img src="images/sample11.jpg" alt="Cap Branding">
-      <img src="images/sample12.jpg" alt="Sticker Printing">
-      <img src="images/sample13.jpg" alt="Pen Branding">
-      <img src="images/sample14.jpg" alt="Bottle Branding">
-      <img src="images/sample15.jpg" alt="T-shirt Printing">
+      <img src="images/sample1.jpeg" alt="Logo Design" />
+      <img src="images/sample2.jpeg" alt="T-Shirt Design" />
+      <img src="images/sample3.jpeg" alt="Vehicle Branding" />
+      <img src="images/sample4.jpeg" alt="Office Branding" />
+      <img src="images/sample5.jpeg" alt="Embroidery" />
+      <img src="images/sample6.jpeg" alt="Backdrop" />
+      <img src="images/sample7.jpeg" alt="Canvas Print" />
+      <img src="images/sample8.jpeg" alt="Flyer Design" />
+      <img src="images/sample9.jpeg" alt="Vector Design" />
+      <img src="images/sample10.jpeg" alt="Pull-up Banner" />
+      <img src="images/sample11.jpeg" alt="Cap Branding" />
+      <img src="images/sample12.jpeg" alt="Sticker Printing" />
+      <img src="images/sample13.jpeg" alt="Pen Branding" />
+      <img src="images/sample14.jpeg" alt="Bottle Branding" />
+      <img src="images/sample15.jpeg" alt="T-shirt Printing" />
     </div>
   </section>
 
