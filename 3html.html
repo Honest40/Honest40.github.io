@@ -15,18 +15,28 @@
       padding: 20px;
     }
 
-    .gallery img {
-      width: 220px;
-      height: 220px;
-      object-fit: cover; /* keeps all images uniform without distortion */
+    /* Keep images clickable and same as before */
+    .gallery a {
+      display: inline-block;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .gallery img:hover {
+    .gallery a:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery img {
+      display: block;
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      user-select: none; /* Prevent dragging */
+      pointer-events: none; /* Disable image drag */
     }
 
     @media (max-width: 768px) {
@@ -71,7 +81,7 @@
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 40px;
       margin: 25px 0 40px 0;
     }
 
@@ -80,10 +90,12 @@
     }
 
     .social-icons a img {
-      width: 70px;
-      height: 70px;
+      width: 90px;  /* bigger size */
+      height: 90px;
       filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
       transition: transform 0.3s ease;
+      user-select: none;
+      pointer-events: auto;
     }
 
     .social-icons a img:hover {
@@ -105,20 +117,49 @@
     <h2>Our Portfolio</h2>
     <p>Here are some of the samples:</p>
     <div class="gallery">
-      <img src="hb.jpg.jpeg" alt="T-Shirt Design" />
-      <img src="car.jpg.jpeg" alt="Vehicle Branding" />
-      <img src="sample4.jpeg.jpeg" alt="Office Branding" />
-      <img src="sample5.jpeg.jpeg" alt="Embroidery" />
-      <img src="sample6.jpeg.jpeg" alt="Backdrop" />
-      <img src="sample7.jpeg.jpeg" alt="Canvas Print" />
-      <img src="sample8.jpeg.jpeg" alt="Flyer Design" />
-      <img src="sample9.jpeg.jpeg" alt="Vector Design" />
-      <img src="sample10.jpeg.jpeg" alt="Pull-up Banner" />
-      <img src="sample11.jpeg.jpeg" alt="Cap Branding" />
-      <img src="sample12.jpeg.jpeg" alt="Sticker Printing" />
-      <img src="sample13.jpeg.jpeg" alt="Pen Branding" />
-      <img src="sample14.jpeg.jpeg" alt="Bottle Branding" />
-      <img src="sample15.jpeg.jpeg" alt="T-shirt Printing" />
+        </a>
+      <a href="hb.jpg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="hb.jpg.jpeg" alt="T-Shirt Design" />
+      </a>
+      <a href="car.jpg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="car.jpg.jpeg" alt="Vehicle Branding" />
+      </a>
+      <a href="sample4.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample4.jpeg.jpeg" alt="Office Branding" />
+      </a>
+      <a href="sample5.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample5.jpeg.jpeg" alt="Embroidery" />
+      </a>
+      <a href="sample6.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample6.jpeg.jpeg" alt="Backdrop" />
+      </a>
+      <a href="sample7.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample7.jpeg.jpeg" alt="Canvas Print" />
+      </a>
+      <a href="sample8.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample8.jpeg.jpeg" alt="Flyer Design" />
+      </a>
+      <a href="sample9.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample9.jpeg.jpeg" alt="Vector Design" />
+      </a>
+      <a href="sample10.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample10.jpeg.jpeg" alt="Pull-up Banner" />
+      </a>
+      <a href="sample11.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample11.jpeg.jpeg" alt="Cap Branding" />
+      </a>
+      <a href="sample12.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample12.jpeg.jpeg" alt="Sticker Printing" />
+      </a>
+      <a href="sample13.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample13.jpeg.jpeg" alt="Pen Branding" />
+      </a>
+      <a href="sample14.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample14.jpeg.jpeg" alt="Bottle Branding" />
+      </a>
+      <a href="sample15.jpeg.jpeg" target="_blank" rel="noopener noreferrer">
+        <img src="sample15.jpeg.jpeg" alt="T-shirt Printing" />
+      </a>
     </div>
 
     <!-- Social Media Icons -->
