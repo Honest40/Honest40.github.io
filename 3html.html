@@ -1,209 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HB Graphics Zambia | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Anton&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f7f7f7;
-      color: #222;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-    .container {
-      background: white;
-      padding: 40px 50px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      max-width: 720px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    /* Navigation styled as 3D buttons */
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 2;
-    }
-    nav a {
-      background: #d62828;
-      background-image: linear-gradient(145deg, #d62828, #a91f1f);
-      color: white;
-      padding: 15px 38px;
-      border-radius: 12px;
-      font-size: 1.15rem;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow:
-        0 0 8px 2px rgba(255 255 255 / 0.9),
-        0 0 20px 4px rgba(255 255 255 / 0.5);
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        filter 0.25s ease;
-      user-select: none;
-      position: relative;
-      overflow: hidden;
-      z-index: 2;
-    }
-    nav a::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -75%;
-      width: 50%;
-      height: 200%;
-      background: rgba(255 255 255 / 0.3);
-      transform: skewX(-20deg) translateY(-50%);
-      transition: left 0.7s ease;
-      filter: blur(15px);
-      z-index: 1;
-    }
-    nav a:hover::before {
-      left: 125%;
-    }
-    nav a:hover {
-      transform: translateY(-7px) scale(1.1);
-      box-shadow:
-        0 0 15px 5px rgba(255 255 255 / 1),
-        0 0 30px 8px rgba(255 255 255 / 0.8);
-      filter: brightness(1.1);
-      z-index: 2;
-    }
-    nav a.active {
-      box-shadow:
-        0 0 20px 6px rgba(255 255 255 / 1),
-        0 0 40px 10px rgba(255 255 255 / 0.9);
-      font-weight: 800;
-    }
-
-    /* Logo area */
-    .logo {
-      max-width: 500px;
-      margin: 0 auto 30px auto;
-      display: block;
-      border-radius: 14px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
-      background: white;
-      padding: 12px;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover {
-      transform: scale(1.06) rotate(-2deg);
-    }
-
-    h1, h2 {
-      font-family: 'Anton', sans-serif;
-      color: #d62828;
-      /* smaller white outline for clarity */
-      -webkit-text-stroke: 1px white;
-      text-stroke: 1px white;
-      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
-      user-select: none;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 2;
-    }
-    p {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 35px;
-      color: #333;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Portfolio gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-      position: relative;
-      z-index: 2;
-    }
-    .gallery img {
-      width: 100%;
-      border-radius: 14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .gallery img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 28px rgba(214, 40, 40, 0.3);
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      font-weight: 600;
-      color: #666;
-      user-select: none;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      body {
-        padding: 30px 15px;
-      }
-      .container {
-        padding: 30px 30px;
-      }
-      nav {
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-      nav a {
-        padding: 12px 28px;
-        font-size: 1rem;
-      }
-      .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="container" role="main" aria-label="HB Graphics Portfolio Page">
-    <nav aria-label="Primary navigation">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html" class="active">Portfolio</a>
-      <a href="contact.html">Contact</a>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="logo.png.jpeg" alt="HB Graphics Logo"width='1500'>
+        <h1>HB Graphics Zambia</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <h1>Our Portfolio</h1>
-    <p>Here are some of our recent projects:</p>
-
-    <div class="gallery" aria-label="Portfolio gallery">
-      <img src="sample1.jpg" alt="Logo Design" />
-      <img src="sample2.jpg" alt="T-Shirt Design" />
-      <img src="sample3.jpg" alt="Vehicle Branding" />
-      <img src="sample4.jpg" alt="Shop Branding" />
+  <section class="portfolio">
+    <h2>Our Portfolio</h2>
+    <p>Here are some of the Samples:</p>
+    <div class="gallery">
+      <img src="sample1.pdf.pdf" alt="Logo Design">
+      <img src="sample2.jpg.jpeg" alt="T-Shirt Design">
+      <img src="sample3.jpg.jpeg" alt="Vehicle Branding">
+      <img src="sample4.jpg.jpeg" alt="Office Branding">
     </div>
+  </section>
 
-    <footer>
-      <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
-    </footer>
-  </main>
+  <footer>
+    <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
