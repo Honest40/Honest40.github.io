@@ -40,6 +40,7 @@
       margin-bottom: 40px;
       position: relative;
       z-index: 2;
+      flex-direction: column;
     }
     nav .logo {
       display: flex;
@@ -47,7 +48,7 @@
       align-items: center;
     }
     nav .logo img {
-      max-width: 280px;
+      max-width: 400px; /* Increased logo size */
       border-radius: 14px;
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
       background: white;
@@ -60,9 +61,9 @@
     }
     nav .logo h1 {
       font-family: 'Anton', sans-serif;
-      font-size: 2.6rem; /* increased font size */
+      font-size: 2.6rem; /* Title font size */
       color: #d62828;
-      -webkit-text-stroke: 1px white; /* slightly thicker stroke */
+      -webkit-text-stroke: 1px white;
       text-stroke: 1px white;
       filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
       margin: 0;
@@ -227,7 +228,7 @@
         padding: 20px 10px;
       }
       nav .logo img {
-        max-width: 180px;
+        max-width: 280px; /* Adjust smaller for mobile */
       }
       nav .logo h1 {
         font-size: 2rem;
