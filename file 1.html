@@ -1,35 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HB Graphics Zambia | Home</title>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Anton&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 720px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle decorative pattern behind content */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 220px;
+      left: -50px;
+      width: 120%;
+      height: 280px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(214,40,40,0.1) 0%, transparent 70%),
+        radial-gradient(circle at 80% 70%, rgba(214,40,40,0.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 20px;
+    }
+
+    /* Header nav styling */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .logo img {
+      max-width: 120px;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s ease;
+      background: white;
+      padding: 6px;
+    }
+    .logo img:hover {
+      transform: scale(1.06) rotate(-2deg);
+    }
+    .logo h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.5rem;
+      color: #d62828;
+      -webkit-text-stroke: 1px white;
+      text-stroke: 1px white;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
+      margin: 0;
+      user-select: none;
+    }
+
+    ul.nav-links {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+    ul.nav-links li a {
+      background: #d62828;
+      background-image: linear-gradient(145deg, #d62828, #a91f1f);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow:
+        0 0 8px 2px rgba(255 255 255 / 0.9),
+        0 0 20px 4px rgba(255 255 255 / 0.5);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    ul.nav-links li a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -75%;
+      width: 50%;
+      height: 200%;
+      background: rgba(255 255 255 / 0.3);
+      transform: skewX(-20deg) translateY(-50%);
+      transition: left 0.7s ease;
+      filter: blur(15px);
+      z-index: 1;
+    }
+    ul.nav-links li a:hover::before {
+      left: 125%;
+    }
+    ul.nav-links li a:hover, ul.nav-links li a.active {
+      transform: translateY(-7px) scale(1.1);
+      box-shadow:
+        0 0 15px 5px rgba(255 255 255 / 1),
+        0 0 30px 8px rgba(255 255 255 / 0.8);
+      filter: brightness(1.1);
+      z-index: 2;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+    }
+    .hero h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 3rem;
+      color: #d62828;
+      margin-bottom: 20px;
+      -webkit-text-stroke: 1px white;
+      text-stroke: 1px white;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
+      letter-spacing: 1.2px;
+    }
+    .hero p {
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-bottom: 35px;
+      color: #333;
+    }
+    .btn {
+      background: #d62828;
+      background-image: linear-gradient(145deg, #d62828, #a91f1f);
+      color: white;
+      padding: 15px 42px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow:
+        0 0 8px 2px rgba(255 255 255 / 0.9),
+        0 0 20px 4px rgba(255 255 255 / 0.5);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -75%;
+      width: 50%;
+      height: 200%;
+      background: rgba(255 255 255 / 0.3);
+      transform: skewX(-20deg) translateY(-50%);
+      transition: left 0.7s ease;
+      filter: blur(15px);
+      z-index: 1;
+    }
+    .btn:hover::before {
+      left: 125%;
+    }
+    .btn:hover {
+      transform: translateY(-7px) scale(1.1);
+      box-shadow:
+        0 0 15px 5px rgba(255 255 255 / 1),
+        0 0 30px 8px rgba(255 255 255 / 0.8);
+      filter: brightness(1.1);
+      z-index: 2;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 1rem;
+      color: #555;
+      user-select: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      nav {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+      ul.nav-links {
+        gap: 15px;
+        justify-content: center;
+      }
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+      .btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+      }
+      .logo h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
+  <div class="container" role="main" aria-label="HB Graphics Zambia Home Page">
+    <nav aria-label="Primary navigation">
       <div class="logo">
-        <img src="logo.png.jpeg" alt="HB Graphics Logo"width='1000'>
-        <h1>HB Graphics Zambia</h1>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h2>Professional Branding & Graphic Design Services in Zambia</h2>
-    <p>From logo design to full branding solutions — we make your brand stand out.</p>
-    <a href="contact.html" class="btn">Get in Touch</a>
-  </section>
-
-  <footer>
-    <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
-  </footer>
-</body>
-</html>
+        <img src="logo.png.jpeg" alt="HB Graphics Logo" />
+        <h1>HB Graphics Zamb
