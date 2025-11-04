@@ -22,8 +22,6 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      user-select: none; /* prevent text selection */
     }
 
     .gallery img:hover {
@@ -69,28 +67,24 @@
       text-align: center;
     }
 
-    /* Lightbox styles */
-    #lightboxOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
+    /* Social icons container */
+    .social-icons {
+      display: flex;
       justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      cursor: zoom-out;
+      gap: 40px;
+      margin: 30px 0 50px;
     }
 
-    #lightboxOverlay img {
-      max-width: 90vw;
-      max-height: 90vh;
-      border-radius: 10px;
-      box-shadow: 0 0 20px white;
-      user-select: none;
-      pointer-events: none;
+    .social-icons a img {
+      width: 50px;
+      height: 50px;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover img {
+      transform: scale(1.1);
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
     }
   </style>
 </head>
@@ -108,7 +102,7 @@
     <h2>Our Portfolio</h2>
     <p>Here are some of the samples:</p>
     <div class="gallery">
-      <img src="sample1.jpeg.jpeg" alt="Logo Design" />
+      <img src="sample1.jpeg" alt="Logo Design" />
       <img src="hb.jpg.jpeg" alt="T-Shirt Design" />
       <img src="car.jpg.jpeg" alt="Vehicle Branding" />
       <img src="sample4.jpeg.jpeg" alt="Office Branding" />
@@ -124,38 +118,19 @@
       <img src="sample14.jpeg.jpeg" alt="Bottle Branding" />
       <img src="sample15.jpeg.jpeg" alt="T-shirt Printing" />
     </div>
-  </section>
 
-  <!-- Lightbox Overlay -->
-  <div id="lightboxOverlay" onclick="closeLightbox()" oncontextmenu="return false;">
-    <img id="lightboxImg" src="" alt="Full View" draggable="false" />
-  </div>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=100083687825364" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <img src="facebook-icon.png" alt="Facebook" />
+      </a>
+      <a href="https://vm.tiktok.com/ZMHcmLPRNxbxm-Nfr7j/" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <img src="tiktok-icon.png" alt="TikTok" />
+      </a>
+    </div>
+  </section>
 
   <footer>
     <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
   </footer>
-
-  <script>
-    const galleryImages = document.querySelectorAll('.gallery img');
-    const lightboxOverlay = document.getElementById('lightboxOverlay');
-    const lightboxImg = document.getElementById('lightboxImg');
-
-    galleryImages.forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxOverlay.style.display = 'flex';
-      });
-      // Disable dragging on images
-      img.ondragstart = () => false;
-    });
-
-    function closeLightbox() {
-      lightboxOverlay.style.display = 'none';
-      lightboxImg.src = '';
-    }
-
-    // Disable right-click on lightbox image to discourage downloads
-    lightboxImg.addEventListener('contextmenu', e => e.preventDefault());
-  </script>
 </body>
 </html>
