@@ -9,7 +9,7 @@ nav a, button {
   display: inline-block;
   background: linear-gradient(145deg, #f44336, #b71c1c); /* Red gradient */
   color: white;
-  padding: 12px 25px;
+  padding: 14px 30px;
   margin: 10px 15px;
   border: none;
   border-radius: 8px;
@@ -19,10 +19,12 @@ nav a, button {
   cursor: pointer;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  user-select: none;
 }
 
 /* Hover effect to make buttons pop */
 nav a:hover, button:hover {
-  transform: translateY(-4px);
-  box-shadow: 8px 8px 15px #911616, -8px -8px 15px #ff6659;
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 8px 8px 18px #911616, -8px -8px 18px #ff6659;
 }
