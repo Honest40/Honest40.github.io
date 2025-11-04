@@ -5,47 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HB Graphics Zambia | Portfolio</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Centering and responsive gallery styling */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 220px;
+      height: 220px;
+      object-fit: cover; /* keeps all images uniform without distortion */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .gallery img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    header .logo img {
+      width: 300px;
+      height: auto;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #c00;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+      margin-top: 30px;
+    }
+
+    h2, p {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <header>
     <nav>
       <div class="logo">
-        <img src="logo.png.jpeg" alt="HB Graphics Logo"width='1500'>
+        <img src="logo.png.jpeg" alt="HB Graphics Logo">
         <h1>HB Graphics Zambia</h1>
       </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html" class="active">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
     </nav>
   </header>
 
   <section class="portfolio">
     <h2>Our Portfolio</h2>
-    <p>Here are some of the Samples:</p>
+    <p>Here are some of the samples:</p>
     <div class="gallery">
-      <img src="sample1.pdf.pdf" alt="Logo Design">
-      <img src="sample2.jpg.jpeg" alt="T-Shirt Design">
-      <img src="sample3.jpg.jpeg" alt="Vehicle Branding">
-      <img src="sample4.jpg.jpeg" alt="Office Branding">
-      <img src="sample5.jpeg,jpeg.jpeg" alt="embroidery">
-      <img src="sample6.jpeg.jpeg.jpeg" alt="emb">
-      <img src="sample7.jpeg.jpeg.jpeg" alt="backdrop">
-      <img src="sample8.jpeg.jpeg.jpeg" alt="canvas">
-      <img src="sample9.jpeg,jpeg.jpeg" alt="flyers">
-      <img src="sample10.jpeg.jpeg.jpeg" alt="image to vector">
-      <img src="sample11.jpeg.jpeg.jpeg" alt="services">
-      <img src="sample12.jpeg.jpeg.jpeg" alt="pull up banner">
-      <img src="sample13.peg.jpeg.jpeg" alt="food singn">
-      <img src="sample14.jpe.jpeg.jpeg" alt="cap Branding">
-      <img src="sample15.jpeg.jpeg.jpeg" alt="cap">
-      <img src="sample16.jpeg.jpeg.jpeg" alt="stickers">
-      <img src="sample17.jpeg.jpeg.jpeg" alt="pen Branding">
-      <img src="sample18.jpeg.jpeg.jpeg" alt="ball Branding">
-      <img src="sample19.jpeg.jpeg.jpeg" alt="bottle">
-      <img src="sample20.jpeg.jpeg.jpeg" alt="tshirt2">
+      <img src="sample1.jpg" alt="Logo Design">
+      <img src="sample2.jpg" alt="T-Shirt Design">
+      <img src="sample3.jpg" alt="Vehicle Branding">
+      <img src="sample4.jpg" alt="Office Branding">
+      <img src="sample5.jpg" alt="Embroidery">
+      <img src="sample6.jpg" alt="Backdrop">
+      <img src="sample7.jpg" alt="Canvas Print">
+      <img src="sample8.jpg" alt="Flyer Design">
+      <img src="sample9.jpg" alt="Vector Design">
+      <img src="sample10.jpg" alt="Pull-up Banner">
+      <img src="sample11.jpg" alt="Cap Branding">
+      <img src="sample12.jpg" alt="Sticker Printing">
+      <img src="sample13.jpg" alt="Pen Branding">
+      <img src="sample14.jpg" alt="Bottle Branding">
+      <img src="sample15.jpg" alt="T-shirt Printing">
     </div>
   </section>
 
