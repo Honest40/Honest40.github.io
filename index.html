@@ -1,66 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HB Graphics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
   <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #222;
-      text-align: center;
       margin: 0;
-      padding: 40px 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #d62828, #0b2545);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255 255 255 / 0.1);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      backdrop-filter: blur(8px);
     }
     h1 {
-      color: #0b2545; /* navy blue */
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      font-size: 3rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
     p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      color: #d62828; /* red */
-      font-weight: bold;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #ffd166;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
     nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
       margin-bottom: 40px;
     }
     nav a {
-      display: inline-block;
-      background: linear-gradient(145deg, #d62828, #a91f1f); /* red gradient */
+      background: #d62828;
+      background-image: linear-gradient(145deg, #d62828, #a91f1f);
       color: white;
-      padding: 15px 30px;
-      margin: 10px 15px;
-      border-radius: 10px;
-      font-size: 18px;
+      padding: 15px 35px;
+      border-radius: 12px;
+      font-size: 1.1rem;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 5px 5px 10px #8e1a1a, -5px -5px 10px #ef3c3c;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow:
+        4px 4px 10px #8e1a1a,
+        -4px -4px 10px #ef3c3c;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
       user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -75%;
+      width: 50%;
+      height: 200%;
+      background: rgba(255 255 255 / 0.3);
+      transform: skewX(-20deg) translateY(-50%);
+      transition: left 0.7s ease;
+      filter: blur(15px);
+      z-index: 1;
+    }
+    nav a:hover::before {
+      left: 125%;
     }
     nav a:hover {
-      transform: translateY(-5px);
-      box-shadow: 8px 8px 15px #8e1a1a, -8px -8px 15px #ef3c3c;
+      transform: translateY(-7px) scale(1.1);
+      box-shadow:
+        6px 6px 15px #8e1a1a,
+        -6px -6px 15px #ef3c3c;
+      filter: brightness(1.1);
+      z-index: 2;
     }
     img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      max-width: 70%;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+      transition: transform 0.3s ease;
+      margin: 0 auto;
+      display: block;
+    }
+    img:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      nav a {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to HB Graphics</h1>
-  <p>Choose a page:</p>
-  <nav>
-    <a href="file 1.html">HOME PAGE</a>
-    <a href="2html.html">Our Services</a>
-    <a href="3html.html">Our Portfolio</a>
-    <a href="4html.html">Contact Us</a>
-  </nav>
-  <img src="logo.png.jpeg" alt="HB Graphics Logo" width="600" />
+  <div class="container">
+    <h1>Welcome to HB Graphics</h1>
+    <p>Choose a page:</p>
+    <nav>
+      <a href="file 1.html">HOME PAGE</a>
+      <a href="2html.html">Our Services</a>
+      <a href="3html.html">Our Portfolio</a>
+      <a href="4html.html">Contact Us</a>
+    </nav>
+    <img src="logo.png.jpeg" alt="HB Graphics Logo" />
+  </div>
 </body>
 </html>
