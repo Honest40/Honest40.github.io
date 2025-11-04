@@ -1,70 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HB Graphics Zambia | Services</title>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Anton&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 720px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative subtle pattern behind content */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 180px;
+      left: -50px;
+      width: 120%;
+      height: 280px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(214,40,40,0.1) 0%, transparent 70%),
+        radial-gradient(circle at 80% 70%, rgba(214,40,40,0.07) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 20px;
+    }
+
+    header nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .logo img {
+      max-width: 280px;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+      background: white;
+      padding: 12px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .logo img:hover {
+      transform: scale(1.06) rotate(-2deg);
+    }
+    .logo h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.8rem;
+      color: #d62828;
+      user-select: none;
+      letter-spacing: 1.5px;
+      margin: 0;
+    }
+
+    h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 3rem;
+      color: #d62828;
+      margin-bottom: 30px;
+      -webkit-text-stroke: 1px white;
+      text-stroke: 1px white;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
+      position: relative;
+      z-index: 2;
+      user-select: none;
+    }
+    .service-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .service-item {
+      background: #fefefe;
+      border-radius: 20px;
+      padding: 24px 20px;
+      width: 220px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      cursor: default;
+      color: #d62828;
+      font-weight: 600;
+      text-align: center;
+      user-select: none;
+    }
+    .service-item:hover {
+      transform: scale(1.12);
+      box-shadow: 0 18px 40px rgba(214, 40, 40, 0.3);
+      background: #ffe3e3;
+      color: #9b0f0f;
+      font-weight: 700;
+      z-index: 10;
+    }
+    .service-item h3 {
+      margin-top: 0;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      user-select: none;
+    }
+    .service-item p {
+      font-size: 1rem;
+      margin-bottom: 18px;
+      user-select: none;
+    }
+
+    a.btn {
+      display: inline-block;
+      background: #d62828;
+      background-image: linear-gradient(145deg, #d62828, #a91f1f);
+      color: white;
+      padding: 12px 35px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow:
+        0 0 8px 2px rgba(255 255 255 / 0.9),
+        0 0 20px 4px rgba(255 255 255 / 0.5);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    a.btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -75%;
+      width: 50%;
+      height: 200%;
+      background: rgba(255 255 255 / 0.3);
+      transform: skewX(-20deg) translateY(-50%);
+      transition: left 0.7s ease;
+      filter: blur(15px);
+      z-index: 1;
+    }
+    a.btn:hover::before {
+      left: 125%;
+    }
+    a.btn:hover {
+      transform: translateY(-7px) scale(1.1);
+      box-shadow:
+        0 0 15px 5px rgba(255 255 255 / 1),
+        0 0 30px 8px rgba(255 255 255 / 0.8);
+      filter: brightness(1.1);
+      z-index: 2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 0;
+      color: #666;
+      font-size: 0.9rem;
+      user-select: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 720px) {
+      .service-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      .service-item {
+        width: 90%;
+      }
+      header nav {
+        flex-direction: column;
+      }
+      .logo img {
+        max-width: 220px;
+        margin-bottom: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="logo">
-        <img src="logo.png.jpeg" alt="HB Graphics Logo"width='270'>
-        <h1>HB Graphics Zambia</h1>
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html" class="active">Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="container" role="main" aria-label="Services page of HB Graphics Zambia">
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="logo.png.jpeg" alt="HB Graphics Logo" />
+          <h1>HB Graphics Zambia</h1>
+        </div>
+      </nav>
+    </header>
 
-  <section class="services">
     <h2>Our Services</h2>
     <div class="service-list">
-      <div class="service-item">
+      <div class="service-item" tabindex="0" aria-label="Logo Design service">
         <h3>Logo Design</h3>
         <p>Creative and unique logos that represent your brand identity.</p>
-        <a href="https://wa.me/260776942402" class="btn">Order Now</a>
+        <a href="https://wa.me/260776942402" class="btn" aria-label="Order Logo Design">Order Now</a>
       </div>
 
-      <div class="service-item">
+      <div class="service-item" tabindex="0" aria-label="Social Media Post Design service">
         <h3>Social Media Post Design</h3>
         <p>Engaging visuals for Facebook, Instagram, and more.</p>
-        <a href="https://wa.me/260776942402" class="btn">Order Now</a>
+        <a href="https://wa.me/260776942402" class="btn" aria-label="Order Social Media Post Design">Order Now</a>
       </div>
 
-      <div class="service-item">
+      <div class="service-item" tabindex="0" aria-label="Brochure Design service">
         <h3>Brochure Design</h3>
         <p>Professional brochures that communicate your message effectively.</p>
-        <a href="https://wa.me/260776942402" class="btn">Order Now</a>
+        <a href="https://wa.me/260776942402" class="btn" aria-label="Order Brochure Design">Order Now</a>
       </div>
 
-      <div class="service-item">
+      <div class="service-item" tabindex="0" aria-label="T-Shirt Printing service">
         <h3>T-Shirt Printing (Round Neck & Golf)</h3>
         <p>Custom printed t-shirts for promotions and corporate branding.</p>
-        <a href="https://wa.me/260776942402" class="btn">Order Now</a>
+        <a href="https://wa.me/260776942402" class="btn" aria-label="Order T-Shirt Printing">Order Now</a>
       </div>
 
-      <div class="service-item">
+      <div class="service-item" tabindex="0" aria-label="Vehicle Branding service">
         <h3>Vehicle Branding</h3>
         <p>Transform your vehicle into a moving advertisement for your business.</p>
-        <a href="https://wa.me/260776942402" class="btn">Order Now</a>
+        <a href="https://wa.me/260776942402" class="btn" aria-label="Order Vehicle Branding">Order Now</a>
       </div>
 
-      <div class="service-item">
+      <div class="service-item" tabindex="0" aria-label="Shop and Office Branding service">
         <h3>Shop & Office Branding</h3>
         <p>Professional interior and exterior branding for shops and offices.</p>
-        <a href="https://wa.me/260776942402" class="btn">Order Now</a>
+        <a href="https://wa.me/260776942402" class="btn" aria-label="Order Shop and Office Branding">Order Now</a>
       </div>
     </div>
-  </section>
 
-  <footer>
-    <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
-  </footer>
+    <footer>
+      <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
+    </footer>
+  </div>
 </body>
 </html>
