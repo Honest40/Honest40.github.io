@@ -6,7 +6,6 @@
   <title>HB Graphics</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Anton&display=swap" rel="stylesheet" />
   <style>
-    /* Reset */
     * {
       box-sizing: border-box;
     }
@@ -34,18 +33,18 @@
       margin-bottom: 15px;
       font-family: 'Anton', sans-serif;
       font-size: 4rem;
-      color: #d62828;
-      text-shadow:
-        2px 2px 0 #b32121,
-        4px 4px 10px rgba(214, 40, 40, 0.7);
+      background: linear-gradient(45deg, #d62828, #f77f00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 2px 1px rgba(214,40,40,0.8));
       letter-spacing: 2px;
       user-select: none;
     }
     p {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
       margin-bottom: 40px;
-      color: #444;
+      color: #333;
     }
     nav {
       display: flex;
@@ -99,7 +98,7 @@
       z-index: 2;
     }
     img.logo {
-      max-width: 460px; /* bigger */
+      max-width: 480px;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
@@ -143,8 +142,8 @@
       z-index: 2;
     }
     .service-icon {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       margin-bottom: 15px;
       fill: #d62828;
       transition: fill 0.3s ease;
@@ -154,7 +153,7 @@
       fill: #9b0f0f;
     }
     .service-title {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     /* Facebook icon container */
@@ -166,7 +165,38 @@
       margin-bottom: 15px;
       box-shadow: 0 3px 8px rgba(24, 119, 242, 0.7);
     }
-    
+
+    /* Contact Info Section */
+    .contact-info {
+      margin-top: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      user-select: none;
+    }
+    .contact-link {
+      color: #d62828;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.3s ease;
+    }
+    .contact-link:hover {
+      color: #9b0f0f;
+    }
+    .contact-icon {
+      width: 30px;
+      height: 30px;
+      fill: #d62828;
+      transition: fill 0.3s ease;
+    }
+    .contact-link:hover .contact-icon {
+      fill: #9b0f0f;
+    }
+
     @media (max-width: 640px) {
       .services {
         flex-direction: column;
@@ -174,6 +204,10 @@
       }
       .service-item {
         width: 70%;
+      }
+      .contact-info {
+        flex-direction: column;
+        gap: 15px;
       }
     }
   </style>
@@ -194,7 +228,9 @@
       <!-- Graphic Design -->
       <div class="service-item" tabindex="0" aria-label="Graphic Design Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <path d="M48 10H16a6 6 0 0 0-6 6v32a6 6 0 0 0 6 6h32a6 6 0 0 0 6-6V16a6 6 0 0 0-6-6Zm-16 38a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm20-6H16V16h32Z"/>
+          <!-- Pen & shapes icon -->
+          <path d="M12 52l12-4 28-28-8-8-28 28-4 12z" fill="#d62828" />
+          <circle cx="40" cy="20" r="5" fill="#f77f00" />
         </svg>
         <div class="service-title">Graphic Design</div>
       </div>
@@ -202,7 +238,10 @@
       <!-- Embroidery -->
       <div class="service-item" tabindex="0" aria-label="Embroidery Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <path d="M32 10l-6 12h12Zm-4 24a4 4 0 1 0 8 0 4 4 0 0 0-8 0Zm20-20v24a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V14Z"/>
+          <!-- Embroidery needle and thread -->
+          <path d="M22 40l20-20" stroke="#d62828" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="24" cy="42" r="3" fill="#f77f00" />
+          <path d="M18 48l12-12" stroke="#d62828" stroke-width="4" stroke-linecap="round"/>
         </svg>
         <div class="service-title">Embroidery</div>
       </div>
@@ -210,14 +249,16 @@
       <!-- Digital Marketing -->
       <div class="service-item" tabindex="0" aria-label="Digital Marketing Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <path d="M44 14 20 30v10l24 16V14z" />
+          <!-- Megaphone -->
+          <path d="M12 26v12l28 14V12L12 26z" fill="#d62828" />
+          <path d="M40 14l10-4v36l-10-4" fill="#f77f00" />
         </svg>
         <div class="service-title">Digital Marketing</div>
       </div>
 
       <!-- Facebook Page Management -->
       <div class="service-item" tabindex="0" aria-label="Facebook Page Management Service">
-        <div class="facebook-icon">
+        <div class="facebook-icon" role="img" aria-label="Facebook logo">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" width="60" height="60" aria-hidden="true">
             <path d="M22.675 0H1.325C.593 0 0 .592 0 1.324v21.352C0 23.408.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.657-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.592 1.324-1.324V1.324C24 .592 23.406 0 22.675 0z"/>
           </svg>
@@ -228,8 +269,13 @@
       <!-- Printing Services -->
       <div class="service-item" tabindex="0" aria-label="Printing Services">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d62828" stroke-width="4" viewBox="0 0 64 64" aria-hidden="true">
-          <rect x="12" y="20" width="40" height="24" rx="3" ry="3"/>
-          <path d="M12 30h40M20 44v8M44 44v8"/>
+          <!-- Large format printer with paper roll -->
+          <rect x="12" y="20" width="40" height="28" rx="4" ry="4"/>
+          <circle cx="20" cy="48" r="4" fill="#d62828"/>
+          <circle cx="44" cy="48" r="4" fill="#d62828"/>
+          <path d="M12 30h40" />
+          <path d="M16 16v12" />
+          <path d="M48 16v12" />
         </svg>
         <div class="service-title">Printing Services</div>
       </div>
@@ -237,9 +283,13 @@
       <!-- Branding Services -->
       <div class="service-item" tabindex="0" aria-label="Branding Services">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d62828" stroke-width="4" viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="32" r="28" />
-          <path d="M20 44l24-24" />
-          <path d="M44 44L20 20" />
+          <!-- Vehicle branding & shop front -->
+          <rect x="10" y="20" width="44" height="24" rx="6" ry="6" />
+          <rect x="20" y="30" width="12" height="8" fill="#d62828" />
+          <rect x="36" y="30" width="12" height="8" fill="#d62828" />
+          <path d="M10 44h44" />
+          <circle cx="20" cy="50" r="4" fill="#d62828" />
+          <circle cx="44" cy="50" r="4" fill="#d62828" />
         </svg>
         <div class="service-title">Branding Services</div>
       </div>
@@ -247,11 +297,30 @@
       <!-- Laser Engraving -->
       <div class="service-item" tabindex="0" aria-label="Laser Engraving Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d62828" stroke-width="4" viewBox="0 0 64 64" aria-hidden="true">
-          <path d="M32 12v40M20 32h24M26 20l12 24" />
+          <!-- Laser beam -->
+          <line x1="20" y1="12" x2="44" y2="52" />
+          <line x1="24" y1="12" x2="48" y2="52" />
+          <circle cx="32" cy="32" r="10" />
         </svg>
         <div class="service-title">Laser Engraving</div>
       </div>
     </section>
+
+    <!-- Contact Info -->
+    <div class="contact-info" aria-label="Contact Information">
+      <a href="https://wa.me/260776942402" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
+          <path d="M20.52 3.48A11.893 11.893 0 0 0 3.48 20.52l-1.92 6.72 6.72-1.92A11.893 11.893 0 0 0 20.52 3.48zm-7.46 15.98c-1.26 0-2.44-.33-3.48-.9l-2.44 1.44 1.44-2.44a6.852 6.852 0 0 1-1.02-3.48c0-3.8 3.08-6.88 6.88-6.88 1.86 0 3.6.76 4.8 2.04a6.843 6.843 0 0 1 2.04 4.8c0 3.8-3.08 6.88-6.88 6.88z"/>
+        </svg>
+        WhatsApp
+      </a>
+      <a href="mailto:hb4life40@gmail.com" class="contact-link" aria-label="Send email">
+        <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" fill="#d62828" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zM4 8l8 5 8-5v-2l-8 5-8-5v2z"/>
+        </svg>
+        Email
+      </a>
+    </div>
   </div>
 </body>
 </html>
