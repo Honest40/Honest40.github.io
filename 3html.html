@@ -22,6 +22,8 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none; /* prevent text selection */
     }
 
     .gallery img:hover {
@@ -66,6 +68,30 @@
     p {
       text-align: center;
     }
+
+    /* Lightbox styles */
+    #lightboxOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      cursor: zoom-out;
+    }
+
+    #lightboxOverlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 20px white;
+      user-select: none;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -100,8 +126,36 @@
     </div>
   </section>
 
+  <!-- Lightbox Overlay -->
+  <div id="lightboxOverlay" onclick="closeLightbox()" oncontextmenu="return false;">
+    <img id="lightboxImg" src="" alt="Full View" draggable="false" />
+  </div>
+
   <footer>
     <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    const galleryImages = document.querySelectorAll('.gallery img');
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxOverlay.style.display = 'flex';
+      });
+      // Disable dragging on images
+      img.ondragstart = () => false;
+    });
+
+    function closeLightbox() {
+      lightboxOverlay.style.display = 'none';
+      lightboxImg.src = '';
+    }
+
+    // Disable right-click on lightbox image to discourage downloads
+    lightboxImg.addEventListener('contextmenu', e => e.preventDefault());
+  </script>
 </body>
 </html>
