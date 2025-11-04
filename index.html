@@ -22,7 +22,7 @@
     }
     .container {
       background: white;
-      padding: 40px 50px;
+      padding: 40px 50px 120px; /* Extra bottom padding for decorations */
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
@@ -47,16 +47,45 @@
       border-radius: 20px;
     }
 
+    /* New decorative circles in bottom corners */
+    .container::after, .container::before {
+      /* Existing ::before is used for pattern, so use ::after and another element for bottom circles */
+    }
+    .container::after {
+      content: '';
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(214,40,40,0.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Added a new element inside container for right corner circle */
+    .bottom-right-circle {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(214,40,40,0.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
     h1 {
       margin-bottom: 20px;
       font-family: 'Anton', sans-serif;
       font-size: 3.8rem;
       color: #d62828;
-      /* white outline for clarity */
-      -webkit-text-stroke: 1.5px white;
-      text-stroke: 1.5px white;
+      /* Reduced white outline: replaced thick stroke with soft shadow */
+      text-shadow:
+        1px 1px 2px rgba(255, 255, 255, 0.8),
+        0 0 8px rgba(214, 40, 40, 0.4);
       user-select: none;
-      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
       letter-spacing: 1.5px;
       position: relative;
       z-index: 2;
@@ -353,6 +382,7 @@
         Email
       </a>
     </div>
+    <div class="bottom-right-circle" aria-hidden="true"></div>
   </div>
 </body>
 </html>
