@@ -1,20 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HB Graphics</title>
-  <link rel="stylesheet" href="replace css.css">
+  <style>
+    /* Reset some default styles */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      text-align: center;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    h1 {
+      color: #0b2545; /* navy blue */
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #d62828; /* red */
+      font-weight: bold;
+    }
+    nav {
+      margin-bottom: 40px;
+    }
+    nav a {
+      display: inline-block;
+      background: linear-gradient(145deg, #f4c430, #cca300); /* yellow gradient */
+      color: #0b2545; /* navy blue text */
+      padding: 15px 30px;
+      margin: 10px 15px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 5px 5px 10px #b38f00, -5px -5px 10px #fff263;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      user-select: none;
+    }
+    nav a:hover {
+      transform: translateY(-5px);
+      box-shadow: 8px 8px 15px #b38f00, -8px -8px 15px #fff263;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
   <h1>Welcome to HB Graphics</h1>
   <p>Choose a page:</p>
-  <ul>
-    <li><a href="file 1.html">HOME PAGE</a></li>
-    <li><a href="2html.html">Our Services</a></li>
-    <li><a href="3html.html">Our Portfolio</a></li>
-    <li><a href="4html.html">Contact Us</a></li>
-  </ul>
-  <img src="logo.png.jpeg" alt="HB Graphics Logo" width="1000">
+  <nav>
+    <a href="file 1.html">HOME PAGE</a>
+    <a href="2html.html">Our Services</a>
+    <a href="3html.html">Our Portfolio</a>
+    <a href="4html.html">Contact Us</a>
+  </nav>
+  <img src="logo.png.jpeg" alt="HB Graphics Logo" width="600" />
 </body>
 </html>
