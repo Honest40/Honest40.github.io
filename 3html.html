@@ -67,24 +67,27 @@
       text-align: center;
     }
 
-    /* Social icons container */
+    /* Social Icons Container */
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin: 30px 0 50px;
+      gap: 30px;
+      margin: 25px 0 40px 0;
+    }
+
+    .social-icons a {
+      display: inline-block;
     }
 
     .social-icons a img {
-      width: 50px;
-      height: 50px;
+      width: 70px;
+      height: 70px;
       filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
       transition: transform 0.3s ease;
     }
 
-    .social-icons a:hover img {
-      transform: scale(1.1);
-      filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+    .social-icons a img:hover {
+      transform: scale(1.15);
     }
   </style>
 </head>
@@ -102,6 +105,7 @@
     <h2>Our Portfolio</h2>
     <p>Here are some of the samples:</p>
     <div class="gallery">
+      <img src="sample1.jpeg" alt="Logo Design" />
       <img src="hb.jpg.jpeg" alt="T-Shirt Design" />
       <img src="car.jpg.jpeg" alt="Vehicle Branding" />
       <img src="sample4.jpeg.jpeg" alt="Office Branding" />
@@ -118,12 +122,13 @@
       <img src="sample15.jpeg.jpeg" alt="T-shirt Printing" />
     </div>
 
+    <!-- Social Media Icons -->
     <div class="social-icons">
-      <a href="https://www.facebook.com/profile.php?id=100083687825364" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-        <img src="facebook-icon.png.png" alt="Facebook" />
+      <a href="https://www.facebook.com/profile.php?id=100083687825364" target="_blank" rel="noopener noreferrer" title="Facebook">
+        <img src="facebook.png" alt="Facebook Icon" />
       </a>
-      <a href="https://vm.tiktok.com/ZMHcmLPRNxbxm-Nfr7j/" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-        <img src="tiktok-icon.png.png" alt="TikTok" />
+      <a href="https://vm.tiktok.com/ZMHcmLPRNxbxm-Nfr7j/" target="_blank" rel="noopener noreferrer" title="TikTok">
+        <img src="tiktok.png" alt="TikTok Icon" />
       </a>
     </div>
   </section>
