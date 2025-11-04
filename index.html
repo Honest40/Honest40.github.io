@@ -13,36 +13,36 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #d62828, #0b2545);
-      color: white;
+      background: #f7f7f7; /* Soft light gray */
+      color: #222;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       min-height: 100vh;
-      padding: 20px;
+      padding: 40px 20px;
     }
     .container {
-      background: rgba(255 255 255 / 0.1);
+      background: white;
       padding: 40px 50px;
       border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       text-align: center;
-      max-width: 700px;
+      max-width: 720px;
       width: 100%;
-      backdrop-filter: blur(8px);
+      /* No backdrop filter needed on white */
     }
     h1 {
       margin-bottom: 15px;
       font-weight: 700;
       font-size: 3rem;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      color: #d62828; /* red */
+      text-shadow: 1px 1px 2px rgba(214, 40, 40, 0.3);
     }
     p {
       font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 40px;
-      color: #ffd166;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      color: #555;
     }
     nav {
       display: flex;
@@ -60,7 +60,6 @@
       font-size: 1.1rem;
       font-weight: 700;
       text-decoration: none;
-      /* White glow shadow instead of red shadow */
       box-shadow:
         0 0 8px 2px rgba(255 255 255 / 0.9),
         0 0 20px 4px rgba(255 255 255 / 0.5);
@@ -90,7 +89,6 @@
     }
     nav a:hover {
       transform: translateY(-7px) scale(1.1);
-      /* Stronger white glow on hover */
       box-shadow:
         0 0 15px 5px rgba(255 255 255 / 1),
         0 0 30px 8px rgba(255 255 255 / 0.8);
@@ -98,12 +96,14 @@
       z-index: 2;
     }
     img.logo {
-      max-width: 70%;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+      max-width: 300px; /* Adjusted smaller so it fits nicely */
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
       margin: 0 auto 40px auto;
       display: block;
+      background: white; /* ensure white behind logo if transparent */
+      padding: 10px;
     }
     img.logo:hover {
       transform: scale(1.05) rotate(-2deg);
@@ -118,36 +118,36 @@
       margin-top: 30px;
     }
     .service-item {
-      background: rgba(255 255 255 / 0.15);
+      background: #f2f2f2;
       border-radius: 18px;
       padding: 25px;
       width: 150px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
       cursor: default;
-      color: white;
+      color: #d62828;
       user-select: none;
       text-align: center;
+      font-weight: 600;
     }
     .service-item:hover {
       transform: scale(1.15);
-      box-shadow: 0 15px 30px rgba(255 255 255, 0.8);
-      background: rgba(255 255 255 / 0.3);
-      color: #d62828;
+      box-shadow: 0 15px 30px rgba(214, 40, 40, 0.3);
+      background: #ffe3e3;
+      color: #9b0f0f;
       font-weight: 700;
     }
     .service-icon {
       width: 60px;
       height: 60px;
       margin-bottom: 15px;
-      fill: white;
+      fill: #d62828;
       transition: fill 0.3s ease;
     }
     .service-item:hover .service-icon {
-      fill: #d62828;
+      fill: #9b0f0f;
     }
     .service-title {
-      font-weight: 600;
       font-size: 1.1rem;
     }
 
@@ -164,10 +164,10 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" role="main">
     <h1>Welcome to HB Graphics</h1>
     <p>Choose a page:</p>
-    <nav>
+    <nav aria-label="Primary navigation">
       <a href="file 1.html">HOME PAGE</a>
       <a href="2html.html">Our Services</a>
       <a href="3html.html">Our Portfolio</a>
@@ -198,7 +198,22 @@
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
           <path d="M44 12H20a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4V16a4 4 0 0 0-4-4Zm-6 30a6 6 0 1 1 0-12 6 6 0 0 1 0 12Z"/>
         </svg>
-        <div class="service-title">Facebook Management</div>
+        <div class="service-title">Facebook Page Management</div>
+      </div>
+      <div class="service-item" tabindex="0">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
+          <path d="M10 10h44v44H10z" fill="none" stroke="#d62828" stroke-width="4" />
+          <path d="M18 40h28v4H18zM18 30h28v4H18zM18 20h28v4H18z"/>
+        </svg>
+        <div class="service-title">Printing Services</div>
+      </div>
+      <div class="service-item" tabindex="0">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
+          <circle cx="32" cy="32" r="28" stroke="#d62828" stroke-width="4" fill="none"/>
+          <path d="M20 44l24-24" stroke="#d62828" stroke-width="4" />
+          <path d="M44 44L20 20" stroke="#d62828" stroke-width="4" />
+        </svg>
+        <div class="service-title">Branding Services</div>
       </div>
     </section>
   </div>
