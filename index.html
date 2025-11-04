@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HB Graphics</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Anton&display=swap" rel="stylesheet" />
   <style>
     /* Reset */
     * {
@@ -32,16 +32,20 @@
     }
     h1 {
       margin-bottom: 15px;
-      font-weight: 700;
-      font-size: 3rem;
+      font-family: 'Anton', sans-serif;
+      font-size: 4rem;
       color: #d62828;
-      text-shadow: 1px 1px 2px rgba(214, 40, 40, 0.3);
+      text-shadow:
+        2px 2px 0 #b32121,
+        4px 4px 10px rgba(214, 40, 40, 0.7);
+      letter-spacing: 2px;
+      user-select: none;
     }
     p {
-      font-size: 1.6rem; /* bigger */
-      font-weight: 700; /* bolder */
+      font-size: 1.6rem;
+      font-weight: 700;
       margin-bottom: 40px;
-      color: #444; /* darker */
+      color: #444;
     }
     nav {
       display: flex;
@@ -95,7 +99,7 @@
       z-index: 2;
     }
     img.logo {
-      max-width: 400px; /* bigger */
+      max-width: 460px; /* bigger */
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
@@ -120,7 +124,7 @@
       background: #f2f2f2;
       border-radius: 18px;
       padding: 25px;
-      width: 150px;
+      width: 160px;
       box-shadow: 0 6px 12px rgba(0,0,0,0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
       cursor: default;
@@ -128,6 +132,7 @@
       user-select: none;
       text-align: center;
       font-weight: 600;
+      position: relative;
     }
     .service-item:hover {
       transform: scale(1.15);
@@ -135,6 +140,7 @@
       background: #ffe3e3;
       color: #9b0f0f;
       font-weight: 700;
+      z-index: 2;
     }
     .service-icon {
       width: 60px;
@@ -142,6 +148,7 @@
       margin-bottom: 15px;
       fill: #d62828;
       transition: fill 0.3s ease;
+      display: inline-block;
     }
     .service-item:hover .service-icon {
       fill: #9b0f0f;
@@ -150,6 +157,16 @@
       font-size: 1.1rem;
     }
 
+    /* Facebook icon container */
+    .facebook-icon {
+      background: #1877f2;
+      border-radius: 12px;
+      padding: 8px;
+      display: inline-block;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 8px rgba(24, 119, 242, 0.7);
+    }
+    
     @media (max-width: 640px) {
       .services {
         flex-direction: column;
@@ -159,7 +176,6 @@
         width: 70%;
       }
     }
-
   </style>
 </head>
 <body>
@@ -175,37 +191,67 @@
     <img src="logo.png.jpeg" alt="HB Graphics Logo" class="logo" />
 
     <section class="services" aria-label="Our Services">
-      <div class="service-item" tabindex="0">
+      <!-- Graphic Design -->
+      <div class="service-item" tabindex="0" aria-label="Graphic Design Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
           <path d="M48 10H16a6 6 0 0 0-6 6v32a6 6 0 0 0 6 6h32a6 6 0 0 0 6-6V16a6 6 0 0 0-6-6Zm-16 38a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm20-6H16V16h32Z"/>
         </svg>
         <div class="service-title">Graphic Design</div>
       </div>
-      <div class="service-item" tabindex="0">
+
+      <!-- Embroidery -->
+      <div class="service-item" tabindex="0" aria-label="Embroidery Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
           <path d="M32 10l-6 12h12Zm-4 24a4 4 0 1 0 8 0 4 4 0 0 0-8 0Zm20-20v24a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V14Z"/>
         </svg>
         <div class="service-title">Embroidery</div>
       </div>
-      <div class="service-item" tabindex="0">
+
+      <!-- Digital Marketing -->
+      <div class="service-item" tabindex="0" aria-label="Digital Marketing Service">
         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <path d="M52 12H12a4 4 0 0 0-4 4v32a4 4 0 0 0 4 4h40a4 4 0 0 0 4-4V16a4 4 0 0 0-4-4Zm-16 34a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z"/>
+          <path d="M44 14 20 30v10l24 16V14z" />
         </svg>
         <div class="service-title">Digital Marketing</div>
       </div>
-      <div class="service-item" tabindex="0">
-        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <path d="M44 12H20a4 4 0 0 0-4 4v28a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4V16a4 4 0 0 0-4-4Zm-6 30a6 6 0 1 1 0-12 6 6 0 0 1 0 12Z"/>
-        </svg>
+
+      <!-- Facebook Page Management -->
+      <div class="service-item" tabindex="0" aria-label="Facebook Page Management Service">
+        <div class="facebook-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24" width="60" height="60" aria-hidden="true">
+            <path d="M22.675 0H1.325C.593 0 0 .592 0 1.324v21.352C0 23.408.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.657-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.592 1.324-1.324V1.324C24 .592 23.406 0 22.675 0z"/>
+          </svg>
+        </div>
         <div class="service-title">Facebook Page Management</div>
       </div>
-      <div class="service-item" tabindex="0">
-        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <path d="M10 10h44v44H10z" fill="none" stroke="#d62828" stroke-width="4" />
-          <path d="M18 40h28v4H18zM18 30h28v4H18zM18 20h28v4H18z"/>
+
+      <!-- Printing Services -->
+      <div class="service-item" tabindex="0" aria-label="Printing Services">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d62828" stroke-width="4" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="12" y="20" width="40" height="24" rx="3" ry="3"/>
+          <path d="M12 30h40M20 44v8M44 44v8"/>
         </svg>
         <div class="service-title">Printing Services</div>
       </div>
-      <div class="service-item" tabindex="0">
-        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" >
-          <circle cx="32" cy="32" r
+
+      <!-- Branding Services -->
+      <div class="service-item" tabindex="0" aria-label="Branding Services">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d62828" stroke-width="4" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="28" />
+          <path d="M20 44l24-24" />
+          <path d="M44 44L20 20" />
+        </svg>
+        <div class="service-title">Branding Services</div>
+      </div>
+
+      <!-- Laser Engraving -->
+      <div class="service-item" tabindex="0" aria-label="Laser Engraving Service">
+        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#d62828" stroke-width="4" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 12v40M20 32h24M26 20l12 24" />
+        </svg>
+        <div class="service-title">Laser Engraving</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
