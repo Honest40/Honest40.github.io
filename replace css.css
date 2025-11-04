@@ -1,111 +1,28 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  background: #fff;
-  color: #222;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Navigation */
-header {
-  background: #e60000;
-  color: #fff;
-  padding: 10px 0;
-}
-
+/* Container to center your buttons horizontally */
 nav {
-  width: 90%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo img {
-  width: 60px;          /* smaller logo size */
-  height: auto;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-.logo h1 {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-}
-
-.nav-links li {
-  margin-left: 20px;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  text-decoration: underline;
-}
-
-/* Page Sections */
-section {
-  flex: 1;
-  padding: 80px 20px;
   text-align: center;
-  background: #fff;
+  margin: 20px 0;
 }
 
-/* Hero Section */
-.hero {
-  background: #fff;
-}
-
-.hero h2 {
-  color: #e60000;
-  font-size: 28px;
-  margin-bottom: 15px;
-}
-
-/* Buttons */
-.btn {
+/* Style for your buttons or links */
+nav a, button {
   display: inline-block;
-  background: #e60000;
-  color: #fff;
-  padding: 10px 20px;
-  margin-top: 15px;
+  background: linear-gradient(145deg, #f44336, #b71c1c); /* Red gradient */
+  color: white;
+  padding: 12px 25px;
+  margin: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 5px 5px 10px #911616, -5px -5px 10px #ff6659;
+  cursor: pointer;
   text-decoration: none;
-  border-radius: 5px;
-  transition: 0.3s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn:hover {
-  background: #cc0000;
+/* Hover effect to make buttons pop */
+nav a:hover, button:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 15px #911616, -8px -8px 15px #ff6659;
 }
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 15px 0;
-  background: #e60000;
-  color: #fff;
-}
-
