@@ -31,7 +31,49 @@
       position: relative;
       overflow: hidden;
     }
-    h2 {
+
+    header nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    nav .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    nav .logo img {
+      max-width: 280px;
+      border-radius: 14px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+      background: white;
+      padding: 12px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+    nav .logo img:hover {
+      transform: scale(1.06) rotate(-2deg);
+    }
+    nav .logo h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2.6rem; /* increased font size */
+      color: #d62828;
+      -webkit-text-stroke: 1px white; /* slightly thicker stroke */
+      text-stroke: 1px white;
+      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
+      margin: 0;
+      user-select: none;
+    }
+
+    section.contact {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    section.contact h2 {
       font-family: 'Anton', sans-serif;
       font-size: 3rem;
       color: #d62828;
@@ -39,86 +81,42 @@
       -webkit-text-stroke: 1px white;
       text-stroke: 1px white;
       filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
-      letter-spacing: 1.5px;
-      position: relative;
-      z-index: 2;
     }
-    p {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 40px;
+    section.contact p {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 30px;
       color: #333;
-      position: relative;
-      z-index: 2;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 25px;
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 2;
-    }
-    nav .logo {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 20px;
-      justify-content: center;
-    }
-    nav .logo img {
-      max-width: 80px;
-      border-radius: 12px;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-      background: white;
-      padding: 6px;
-      transition: transform 0.3s ease;
-    }
-    nav .logo img:hover {
-      transform: scale(1.05) rotate(-2deg);
-    }
-    nav .logo h1 {
-      font-family: 'Anton', sans-serif;
-      font-size: 1.8rem;
-      color: #d62828;
-      -webkit-text-stroke: 0.7px white;
-      text-stroke: 0.7px white;
-      filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.15));
-      margin: 0;
     }
     .contact-info {
+      margin-bottom: 30px;
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin-bottom: 40px;
+      gap: 30px;
       flex-wrap: wrap;
-      position: relative;
-      z-index: 2;
     }
     .btn {
-      background: linear-gradient(145deg, #d62828, #a91f1f);
+      background: #d62828;
+      background-image: linear-gradient(145deg, #d62828, #a91f1f);
       color: white;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-size: 1.1rem;
       font-weight: 700;
-      font-size: 1.2rem;
-      padding: 16px 40px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
+      text-decoration: none;
       box-shadow:
-        0 0 10px 3px rgba(255 255 255 / 0.9),
-        0 0 25px 6px rgba(255 255 255 / 0.5);
+        0 0 8px 2px rgba(255 255 255 / 0.9),
+        0 0 20px 4px rgba(255 255 255 / 0.5);
       transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
         filter 0.25s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
       user-select: none;
+      display: inline-block;
+      cursor: pointer;
       position: relative;
       overflow: hidden;
+      z-index: 2;
     }
     .btn::before {
       content: '';
@@ -139,62 +137,57 @@
     .btn:hover {
       transform: translateY(-7px) scale(1.1);
       box-shadow:
-        0 0 20px 6px rgba(255 255 255 / 1),
-        0 0 40px 12px rgba(255 255 255 / 0.8);
+        0 0 15px 5px rgba(255 255 255 / 1),
+        0 0 30px 8px rgba(255 255 255 / 0.8);
       filter: brightness(1.1);
       z-index: 2;
-      text-decoration: none;
-      color: white;
     }
+
     form {
-      max-width: 600px;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 25px;
-      position: relative;
-      z-index: 2;
+      gap: 15px;
+      max-width: 600px;
+      margin: 0 auto;
     }
     input[type="text"],
     input[type="email"],
     textarea {
-      padding: 14px 20px;
-      font-size: 1.1rem;
-      border-radius: 12px;
+      padding: 14px 18px;
+      border-radius: 10px;
       border: 2px solid #d62828;
-      outline: none;
-      resize: vertical;
+      font-size: 1.1rem;
       font-family: 'Poppins', sans-serif;
-      transition: box-shadow 0.3s ease;
+      resize: vertical;
+      transition: border-color 0.3s ease;
     }
     input[type="text"]:focus,
     input[type="email"]:focus,
     textarea:focus {
-      box-shadow: 0 0 12px 3px #d62828;
+      outline: none;
       border-color: #a91f1f;
-    }
-    textarea {
-      min-height: 120px;
+      box-shadow: 0 0 6px #a91f1faa;
     }
     button[type="submit"] {
-      background: linear-gradient(145deg, #d62828, #a91f1f);
+      background: #d62828;
+      background-image: linear-gradient(145deg, #d62828, #a91f1f);
       color: white;
-      font-weight: 700;
-      font-size: 1.3rem;
-      padding: 16px 0;
-      border-radius: 14px;
       border: none;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 14px;
       cursor: pointer;
       box-shadow:
-        0 0 15px 5px rgba(255 255 255 / 0.9),
-        0 0 35px 9px rgba(255 255 255 / 0.5);
+        0 0 8px 2px rgba(255 255 255 / 0.9),
+        0 0 20px 4px rgba(255 255 255 / 0.5);
       transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
         filter 0.25s ease;
-      user-select: none;
       position: relative;
       overflow: hidden;
+      z-index: 2;
     }
     button[type="submit"]::before {
       content: '';
@@ -215,69 +208,67 @@
     button[type="submit"]:hover {
       transform: translateY(-7px) scale(1.1);
       box-shadow:
-        0 0 20px 6px rgba(255 255 255 / 1),
-        0 0 45px 15px rgba(255 255 255 / 0.8);
+        0 0 15px 5px rgba(255 255 255 / 1),
+        0 0 30px 8px rgba(255 255 255 / 0.8);
       filter: brightness(1.1);
       z-index: 2;
     }
+
     footer {
-      margin-top: 60px;
+      margin-top: 40px;
       text-align: center;
       font-size: 1rem;
-      font-weight: 600;
-      color: #666;
+      color: #555;
       user-select: none;
-      position: relative;
-      z-index: 2;
     }
+
     @media (max-width: 640px) {
-      .container {
-        padding: 30px 20px;
+      body {
+        padding: 20px 10px;
       }
-      .contact-info {
-        flex-direction: column;
-        gap: 20px;
+      nav .logo img {
+        max-width: 180px;
       }
-      form {
-        width: 100%;
-        gap: 18px;
+      nav .logo h1 {
+        font-size: 2rem;
       }
-      input[type="text"],
-      input[type="email"],
-      textarea {
+      section.contact h2 {
+        font-size: 2.5rem;
+      }
+      .btn {
+        padding: 12px 22px;
         font-size: 1rem;
-      }
-      button[type="submit"] {
-        font-size: 1.1rem;
-        padding: 14px 0;
       }
     }
   </style>
 </head>
 <body>
   <div class="container" role="main" aria-label="HB Graphics Contact Page">
-    <nav aria-label="Primary navigation">
-      <div class="logo">
-        <img src="logo.png.jpeg" alt="HB Graphics Logo" />
-        <h1>HB Graphics Zambia</h1>
+    <header>
+      <nav>
+        <div class="logo">
+          <img src="logo.png.jpeg" alt="HB Graphics Logo" />
+          <h1>HB Graphics Zambia</h1>
+        </div>
+      </nav>
+    </header>
+
+    <section class="contact">
+      <h2>Contact Us</h2>
+      <p>Let’s work together on your next project!</p>
+
+      <div class="contact-info">
+        <a href="https://wa.me/260776942402" class="btn" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+        <a href="mailto:hbforlife40@gmail.com" class="btn">Send Email</a>
       </div>
-      <!-- Navigation links removed as requested -->
-    </nav>
 
-    <h2>Contact Us</h2>
-    <p>Let’s work together on your next project!</p>
-
-    <div class="contact-info">
-      <a href="https://wa.me/260776942402" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
-      <a href="mailto:hbforlife40@gmail.com" class="btn" aria-label="Send Email">Send Email</a>
-    </div>
-
-    <form action="#" method="post" aria-label="Contact form">
-      <input type="text" placeholder="Your Name" required aria-required="true" />
-      <input type="email" placeholder="Your Email" required aria-required="true" />
-      <textarea placeholder="Your Message" rows="5" required aria-required="true"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+      <form action="#" method="post">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
 
     <footer>
       <p>© 2025 HB Graphics Zambia. All Rights Reserved.</p>
