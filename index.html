@@ -3,82 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HB Graphics Zambia | Design Order</title>
+  <title>HB Graphics Zambia | Design & Branding Orders</title>
   <style>
     body {
       font-family: "Poppins", sans-serif;
-      background: #f5f7fa;
+      background: #fff;
+      color: #111;
       margin: 0;
       padding: 0;
     }
     header {
-      background: #111827;
-      color: #fff;
       text-align: center;
+      background: #ff0000;
       padding: 20px;
     }
+    header img {
+      width: 150px;
+      border-radius: 10px;
+    }
     header h1 {
-      margin: 0;
+      color: #fff;
+      margin-top: 10px;
       font-size: 24px;
       letter-spacing: 1px;
     }
     main {
-      max-width: 480px;
-      margin: 30px auto;
-      background: white;
+      max-width: 500px;
+      margin: 20px auto;
+      background: #fff;
+      border: 2px solid #ff0000;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
       padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: 600;
-      color: #333;
     }
     input, select, textarea {
       width: 100%;
       padding: 12px;
+      margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      margin-top: 5px;
       font-size: 15px;
     }
+    input[type="file"] {
+      border: none;
+    }
     button {
-      background: #0ea5e9;
-      color: white;
-      font-size: 18px;
+      background: #ff0000;
+      color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 12px;
-      margin-top: 20px;
+      padding: 14px;
+      font-size: 18px;
       width: 100%;
+      margin-top: 20px;
       cursor: pointer;
     }
     button:hover {
-      background: #0284c7;
+      background: #d60000;
+    }
+    .payment {
+      background: #fff0f0;
+      border-left: 4px solid #ff0000;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 8px;
     }
     footer {
       text-align: center;
       padding: 15px;
-      color: #555;
       font-size: 14px;
-    }
-    .payment {
-      background: #f0f9ff;
-      padding: 10px;
-      border-radius: 8px;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #0369a1;
+      background: #ff0000;
+      color: #fff;
+      margin-top: 30px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
     }
   </style>
 </head>
 <body>
 
   <header>
+    <img src="hb_logo.png" alt="HB Graphics Logo" />
     <h1>HB Graphics Zambia</h1>
-    <p>Order Your Design or Branding Service</p>
+    <p style="color:#fff;">Graphic Design | Branding | Printing | Laser Engraving | Web Solutions</p>
   </header>
 
   <main>
@@ -90,29 +102,40 @@
       <select id="service" required>
         <option value="">-- Choose a service --</option>
         <option>Logo Design</option>
-        <option>Social Media Post Design</option>
+        <option>Business Card Design</option>
+        <option>Flyer Design</option>
+        <option>Brochure Design</option>
+        <option>Poster/Banner Design</option>
         <option>T-shirt Printing (Round Neck)</option>
         <option>T-shirt Printing (Golf)</option>
+        <option>T-shirt Printing (Corporate)</option>
+        <option>Hoodie Printing</option>
+        <option>Mug/Cup Printing</option>
         <option>Vehicle Branding</option>
         <option>Shop Branding</option>
         <option>Office Branding</option>
-        <option>Brochure/Flyer Design</option>
+        <option>Laser Engraving</option>
+        <option>Web Design</option>
+        <option>Web Development</option>
+        <option>Portfolio Website Design</option>
       </select>
 
       <label for="details">Project Details</label>
       <textarea id="details" rows="4" placeholder="Describe what you want..."></textarea>
 
-      <label for="budget">Your Budget (ZMW)</label>
-      <input type="number" id="budget" placeholder="e.g. 200" />
+      <label for="budget">Budget (ZMW)</label>
+      <input type="number" id="budget" placeholder="e.g. 500" />
 
       <label for="deadline">Deadline</label>
       <input type="date" id="deadline" />
 
+      <label for="file">Upload Logo / Picture / Sketch</label>
+      <input type="file" id="file" accept="image/*" />
+
       <div class="payment">
-        <b>💳 Payment Options:</b><br>
-        MTN MoMo: <b>+260 776942402</b><br>
+        <b>💳 Payment Method:</b><br>
         Airtel Money: <b>+260 776942402</b><br>
-        <small>Pay before or after confirming with us on WhatsApp.</small>
+        <small>Confirm your order via WhatsApp before payment.</small>
       </div>
 
       <button type="button" onclick="sendToWhatsApp()">Send Order on WhatsApp</button>
@@ -130,28 +153,32 @@
       const details = document.getElementById("details").value.trim();
       const budget = document.getElementById("budget").value.trim();
       const deadline = document.getElementById("deadline").value;
+      const fileInput = document.getElementById("file");
 
       if (!name || !service) {
-        alert("Please fill in your name and select a service.");
+        alert("Please enter your name and select a service.");
         return;
       }
 
-      const message = 
-        `Hello HB Graphics Zambia! 👋%0A%0A` +
-        `*New Design Order*%0A` +
+      let message =
+        `Hello HB Graphics Zambia 👋%0A%0A` +
+        `*New Order Request*%0A` +
         `Name: ${name}%0A` +
         `Service: ${service}%0A` +
         `Details: ${details || 'N/A'}%0A` +
         `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}%0A` +
         `Deadline: ${deadline || 'Not specified'}%0A%0A` +
-        `Payment Option: MTN/Airtel Money%0A` +
-        `📞 Contact me back on WhatsApp.`
+        `Payment: Airtel Money (+260 776942402)%0A` +
+        `Please confirm my order.%0A`;
 
-      const whatsappNumber = "260776942402"; // Your number without +
+      const whatsappNumber = "260776942402";
       const url = `https://wa.me/${whatsappNumber}?text=${message}`;
       window.open(url, "_blank");
+
+      if (fileInput.files.length > 0) {
+        alert("Note: WhatsApp doesn't auto-attach files — please attach your file manually after chat opens.");
+      }
     }
   </script>
-
 </body>
 </html>
