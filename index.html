@@ -447,7 +447,7 @@
     <div class="donation-buttons">
       <button onclick="window.open('https://wa.me/260776942402', '_blank')">WhatsApp</button>
       <button onclick="window.location='mailto:hb4life40@gmail.com'">Email</button>
-      <button onclick="alert('Mobile Money Number: 0977 123 456\nPlease send your appreciation here!')">Mobile Money</button>
+      <button onclick="alert('Mobile Money Number: 0776942402 (Honest Bulilu)\nPlease send your appreciation here!')">Mobile Money</button>
     </div>
   </section>
 </main>
@@ -539,6 +539,7 @@
     if(!('speechSynthesis' in window)) return;
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = window.speechSynthesis.getVoices();
+    // Try to find male voice in English, fallback to first voice
     const maleVoice = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male')) || voices[0];
     if(maleVoice) utterance.voice = maleVoice;
     window.speechSynthesis.speak(utterance);
@@ -549,217 +550,283 @@
     // Basic keyword handling for demo purpose
     const msgLower = message.toLowerCase();
 
-    if(msgLower.includes('hello') || msgLower.includes('hi')) {
-      return "Hello! How can I assist you today with graphic design, laser engraving, or our services?";
+    if(msgLower.includes('services')) {
+      return "I offer graphic design, car branding, shop and office branding, printing, laser engraving, digital marketing, and social media account management. How can I assist you today?";
     }
-    if(msgLower.includes('price') || msgLower.includes('cost')) {
-      return "Please specify which service you're interested in so I can provide an accurate quote.";
+    if(msgLower.includes('hi') || msgLower.includes('hello')) {
+      return "Hello! I'm Honest's AI assistant. How can I help you today?";
     }
-    if(msgLower.includes('color')) {
-      return "We offer expert advice on color choices for your brand. What colors do you prefer?";
+    if(msgLower.includes('help')) {
+      return "Sure! You can ask me about HB Graphics services, games, or general questions.";
     }
-    if(msgLower.includes('thank')) {
-      return "You're welcome! If you have more questions, feel free to ask.";
-    }
-    if(msgLower.trim().length < 3) {
-      return "Could you please provide more details so I can assist you better?";
-    }
-
-    // Default fallback response + show contact options
-    appendContactButtons();
-    return "I'm sorry, I didn't quite get that. You can reach us directly via WhatsApp or Email for detailed assistance.";
-  }
-
-  // Show contact buttons in chat area
-  function appendContactButtons() {
-    if(document.getElementById('chatContactButtons')) return; // avoid duplicates
-    const container = document.createElement('div');
-    container.id = 'chatContactButtons';
-
-    const whatsappBtn = document.createElement('button');
-    whatsappBtn.textContent = "WhatsApp";
-    whatsappBtn.onclick = () => window.open('https://wa.me/260776942402', '_blank');
-
-    const emailBtn = document.createElement('button');
-    emailBtn.textContent = "Email";
-    emailBtn.onclick = () => window.location = 'mailto:hb4life40@gmail.com';
-
-    container.appendChild(whatsappBtn);
-    container.appendChild(emailBtn);
-
-    chatMessages.appendChild(container);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    // Fallback echo
+    return "Thanks for your message! I'm here to help with HB Graphics services and learning games.";
   }
 
   async function sendMessage() {
-    const message = chatInput.value.trim();
-    if (!message) return;
-    appendMessage(message, 'user');
+    const msg = chatInput.value.trim();
+    if(!msg) return;
+    appendMessage(msg, 'user');
     chatInput.value = '';
-
-    // Simulate AI thinking delay
-    appendMessage('...', 'ai');
+    chatInput.disabled = true;
     chatSendBtn.disabled = true;
-    const response = await getAIResponse(message);
-    // Remove the '...' message
-    chatMessages.querySelector('.message.ai:last-child').remove();
-    appendMessage(response, 'ai');
-    speak(response);
-    chatSendBtn.disabled = false;
+
+    // Simulate AI processing delay
+    setTimeout(async () => {
+      const reply = await getAIResponse(msg);
+      appendMessage(reply, 'ai');
+      speak(reply);
+      chatInput.disabled = false;
+      chatSendBtn.disabled = false;
+      chatInput.focus();
+    }, 700);
   }
 
-  chatSendBtn.addEventListener('click', sendMessage);
-  chatInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') sendMessage();
+  chatSendBtn.onclick = sendMessage;
+  chatInput.addEventListener('keydown', e => {
+    if(e.key === 'Enter') sendMessage();
   });
 
-  // =============== Games Section ===============
+  // =============== Games ===============
 
-  // Sample for 10+ games (questions simplified here, you can expand)
-  const graphicDesignQuestions = [
-    {question: "What does RGB stand for?", answers: ["Red Green Blue", "Red Gray Black", "Really Good Brand", "Random Graphic Board"], correct: "Red Green Blue"},
-    {question: "Which software is used for vector graphics?", answers: ["Adobe Illustrator", "Photoshop", "MS Paint", "Word"], correct: "Adobe Illustrator"},
-    // ... Add more questions
-  ];
-
-  const marketingQuestions = [
-    {question: "What is SEO?", answers: ["Search Engine Optimization", "Social Event Organizer", "Sales Expected Output", "Server Error Online"], correct: "Search Engine Optimization"},
-    {question: "What is conversion rate?", answers: ["Visitors who buy", "Number of clicks", "Total page views", "Social media followers"], correct: "Visitors who buy"},
-    // ... Add more questions
-  ];
-
-  const colorCombinationQuestions = [
-    {question: "Which colors go well with red?", answers: ["White", "Black", "Green", "All of the above"], correct: "All of the above"},
-    {question: "Best neutral color to combine with bright colors?", answers: ["Gray", "Yellow", "Pink", "Purple"], correct: "Gray"},
-    // ... Add more questions
-  ];
-
-  const colorMeaningQuestions = [
-    {question: "What does the color blue usually represent?", answers: ["Trust and calm", "Anger", "Happiness", "Danger"], correct: "Trust and calm"},
-    {question: "What feeling does green often evoke?", answers: ["Nature and growth", "Fear", "Excitement", "Sadness"], correct: "Nature and growth"},
-    // ... Add more questions
-  ];
-
-  const brandColorSuggestions = [
-    {question: "Which color suits a health brand?", answers: ["Green", "Red", "Black", "Yellow"], correct: "Green"},
-    {question: "Which color suits a luxury brand?", answers: ["Gold", "Blue", "Orange", "Pink"], correct: "Gold"},
-    // ... Add more questions
-  ];
-
-  const codingLanguagesQuestions = [
-    {question: "Which language is used for web styling?", answers: ["CSS", "HTML", "JavaScript", "Python"], correct: "CSS"},
-    {question: "Which language runs in the browser?", answers: ["JavaScript", "Python", "C++", "Java"], correct: "JavaScript"},
-    // ... Add more questions
-  ];
-
-  const codingTechniquesQuestions = [
-    {question: "What is a loop?", answers: ["Repeating code", "A function", "A variable", "An error"], correct: "Repeating code"},
-    {question: "What does 'if' statement do?", answers: ["Conditional execution", "Looping", "Declares a variable", "Throws error"], correct: "Conditional execution"},
-    // ... Add more questions
-  ];
-
-  const digitalMarketingQuestions = [
-    {question: "What is email marketing?", answers: ["Sending promotional emails", "Calling customers", "Sending flyers", "Printing ads"], correct: "Sending promotional emails"},
-    {question: "What is PPC?", answers: ["Pay Per Click", "Public Private Communication", "Price Per Customer", "Post Paid Campaign"], correct: "Pay Per Click"},
-    // ... Add more questions
-  ];
-
-  const socialMediaMarketingQuestions = [
-    {question: "Which platform is best for B2B marketing?", answers: ["LinkedIn", "Instagram", "TikTok", "Snapchat"], correct: "LinkedIn"},
-    {question: "What is engagement?", answers: ["Likes, shares, and comments", "Number of ads", "Page visits", "Sales"], correct: "Likes, shares, and comments"},
-    // ... Add more questions
-  ];
-
-  const logoDesignQuestions = [
-    {question: "What should a good logo be?", answers: ["Simple and memorable", "Complex and colorful", "Text only", "Animated"], correct: "Simple and memorable"},
-    {question: "Which format is best for logo scalability?", answers: ["Vector (SVG)", "JPEG", "PNG", "GIF"], correct: "Vector (SVG)"},
-    // ... Add more questions
-  ];
-
+  // Quiz questions for each game category
   const allGames = {
-    "Graphic Design": graphicDesignQuestions,
-    "Marketing": marketingQuestions,
-    "Color Combinations": colorCombinationQuestions,
-    "Color Meaning": colorMeaningQuestions,
-    "Brand Color Suggestions": brandColorSuggestions,
-    "Coding Languages": codingLanguagesQuestions,
-    "Coding Techniques": codingTechniquesQuestions,
-    "Digital Marketing": digitalMarketingQuestions,
-    "Social Media Marketing": socialMediaMarketingQuestions,
-    "Logo Design Principles": logoDesignQuestions
+    "Programming Languages": [
+      {
+        question: "Which language is primarily used for web development?",
+        answers: ["Python", "JavaScript", "C++", "Java"],
+        correct: "JavaScript"
+      },
+      {
+        question: "What language is known for its use in AI and data science?",
+        answers: ["Java", "Python", "Ruby", "Go"],
+        correct: "Python"
+      },
+      {
+        question: "Which language is known for system programming?",
+        answers: ["C", "HTML", "CSS", "SQL"],
+        correct: "C"
+      },
+      {
+        question: "Which language runs primarily in a web browser?",
+        answers: ["JavaScript", "C#", "PHP", "Swift"],
+        correct: "JavaScript"
+      },
+      {
+        question: "Which is a statically typed language?",
+        answers: ["Java", "JavaScript", "Python", "Ruby"],
+        correct: "Java"
+      }
+    ],
+    "Machine Learning": [
+      {
+        question: "What is the main goal of supervised learning?",
+        answers: ["Cluster data", "Predict outputs", "Reduce dimensionality", "Generate data"],
+        correct: "Predict outputs"
+      },
+      {
+        question: "Which algorithm is used for classification?",
+        answers: ["Linear Regression", "Decision Trees", "K-Means", "PCA"],
+        correct: "Decision Trees"
+      },
+      {
+        question: "What does 'overfitting' mean?",
+        answers: [
+          "Model fits training data too well",
+          "Model underperforms on training data",
+          "Model is too simple",
+          "Model never learns"
+        ],
+        correct: "Model fits training data too well"
+      },
+      {
+        question: "Which library is popular for machine learning in Python?",
+        answers: ["TensorFlow", "Django", "React", "Node.js"],
+        correct: "TensorFlow"
+      },
+      {
+        question: "What type of learning uses rewards and punishments?",
+        answers: ["Supervised", "Unsupervised", "Reinforcement", "Deep"],
+        correct: "Reinforcement"
+      }
+    ],
+    "Social Media Marketing": [
+      {
+        question: "What is 'engagement' in social media?",
+        answers: ["Likes and comments", "Followers only", "Number of ads", "Page views"],
+        correct: "Likes and comments"
+      },
+      {
+        question: "Which platform is best for professional networking?",
+        answers: ["Instagram", "LinkedIn", "TikTok", "Snapchat"],
+        correct: "LinkedIn"
+      },
+      {
+        question: "What does 'SEO' stand for?",
+        answers: [
+          "Search Engine Optimization",
+          "Social Engagement Order",
+          "Simple Email Outreach",
+          "Sales Execution Operation"
+        ],
+        correct: "Search Engine Optimization"
+      },
+      {
+        question: "What type of content typically gets highest reach?",
+        answers: ["Videos", "Text only", "Static images", "Emails"],
+        correct: "Videos"
+      },
+      {
+        question: "What is a 'call to action'?",
+        answers: [
+          "A prompt to users to act",
+          "A background music",
+          "A type of advertisement",
+          "A social media algorithm"
+        ],
+        correct: "A prompt to users to act"
+      }
+    ],
+    "Graphic Design": [
+      {
+        question: "Which software is popular for vector graphics?",
+        answers: ["Adobe Illustrator", "Photoshop", "InDesign", "Premiere Pro"],
+        correct: "Adobe Illustrator"
+      },
+      {
+        question: "What does 'RGB' stand for?",
+        answers: [
+          "Red Green Blue",
+          "Red Grey Black",
+          "Random Graphic Bits",
+          "Ready Go Build"
+        ],
+        correct: "Red Green Blue"
+      },
+      {
+        question: "Which file format is best for logos?",
+        answers: ["JPEG", "PNG", "SVG", "BMP"],
+        correct: "SVG"
+      },
+      {
+        question: "What is 'kerning'?",
+        answers: [
+          "Spacing between letters",
+          "Image resolution",
+          "Color saturation",
+          "Font style"
+        ],
+        correct: "Spacing between letters"
+      },
+      {
+        question: "Which color model is used for printing?",
+        answers: ["RGB", "CMYK", "HSV", "LAB"],
+        correct: "CMYK"
+      }
+    ],
+    "Easy English": [
+      {
+        question: "What is the plural of 'child'?",
+        answers: ["Childs", "Childes", "Children", "Child"],
+        correct: "Children"
+      },
+      {
+        question: "What is the past tense of 'go'?",
+        answers: ["Went", "Goed", "Gone", "Going"],
+        correct: "Went"
+      },
+      {
+        question: "Which word is a noun?",
+        answers: ["Run", "Beautiful", "Apple", "Quickly"],
+        correct: "Apple"
+      },
+      {
+        question: "What is the opposite of 'hot'?",
+        answers: ["Cold", "Warm", "Cool", "Boiling"],
+        correct: "Cold"
+      },
+      {
+        question: "Which is a greeting?",
+        answers: ["Goodbye", "Hello", "Sorry", "Please"],
+        correct: "Hello"
+      }
+    ]
   };
 
-  const gameTabsContainer = document.getElementById('gameTabs');
+  // Game state variables
+  let currentGameName = "Programming Languages";
+  const totalQuestionsPerLevel = 10;
+
+  let gameState = {
+    currentLevel: 1,
+    score: 0,
+    questionIndex: 0
+  };
+
+  // DOM references
+  const gameTabs = document.getElementById('gameTabs');
   const gameContainer = document.getElementById('gameContainer');
 
-  let currentGameName = Object.keys(allGames)[0];
-
-  function shuffleArray(array) {
-    let arr = array.slice();
-    for (let i = arr.length - 1; i > 0; i--) {
+  // Shuffle helper
+  function shuffleArray(arr) {
+    let array = arr.slice();
+    for(let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    return arr;
+    return array;
   }
 
-  const gameState = {
-    currentLevel: 1,
-    questionsPool: [],
-    questionIndex: 0,
-    score: 0,
-    totalQuestionsPerLevel: 10
-  };
-
-  function createTabs() {
-    gameTabsContainer.innerHTML = '';
+  // Render game tabs
+  function renderGameTabs() {
+    gameTabs.innerHTML = '';
     Object.keys(allGames).forEach(gameName => {
       const btn = document.createElement('button');
+      btn.className = 'nav-link' + (gameName === currentGameName ? ' active' : '');
       btn.textContent = gameName;
-      btn.className = 'nav-link';
-      if (gameName === currentGameName) btn.classList.add('active');
       btn.onclick = () => {
-        if (currentGameName !== gameName) {
+        if(currentGameName !== gameName) {
           currentGameName = gameName;
           resetGame();
           renderGame();
-          updateTabs();
+          updateTabsActive();
         }
       };
-      gameTabsContainer.appendChild(btn);
+      gameTabs.appendChild(btn);
     });
   }
 
-  function updateTabs() {
-    Array.from(gameTabsContainer.children).forEach(btn => {
+  // Update tabs active styling
+  function updateTabsActive() {
+    Array.from(gameTabs.children).forEach(btn => {
       btn.classList.toggle('active', btn.textContent === currentGameName);
     });
   }
 
+  // Reset game state
   function resetGame() {
     gameState.currentLevel = 1;
     gameState.score = 0;
     gameState.questionIndex = 0;
-    gameState.questionsPool = shuffleArray(allGames[currentGameName]);
   }
 
+  // Render the game question or level summary
   function renderGame() {
-    const totalQ = gameState.totalQuestionsPerLevel;
-    if (gameState.questionIndex >= totalQ) {
-      const levelSummary = `
+    // If level completed, show summary with buttons
+    if(gameState.questionIndex > 0 && gameState.questionIndex % totalQuestionsPerLevel === 0) {
+      const levelScore = gameState.score;
+      gameContainer.innerHTML = `
         <div style="text-align:center; margin-top:20px;">
           <h3>Level ${gameState.currentLevel} Completed!</h3>
-          <p>Your Score: ${gameState.score} / ${totalQ}</p>
+          <p>Your Score: ${levelScore} / ${totalQuestionsPerLevel}</p>
           <button id="nextLevelBtn">Next Level</button>
           <button id="restartBtn">Restart Game</button>
         </div>
       `;
-      gameContainer.innerHTML = levelSummary;
       document.getElementById('nextLevelBtn').onclick = () => {
         gameState.currentLevel++;
         gameState.score = 0;
         gameState.questionIndex = 0;
-        gameState.questionsPool = shuffleArray(allGames[currentGameName]);
         renderGame();
       };
       document.getElementById('restartBtn').onclick = () => {
@@ -769,13 +836,15 @@
       return;
     }
 
-    const qObj = gameState.questionsPool[gameState.questionIndex];
-    let answersShuffled = shuffleArray(qObj.answers);
+    // Pick a random question for the current game
+    const questionsArray = allGames[currentGameName];
+    const qObj = questionsArray[Math.floor(Math.random() * questionsArray.length)];
+    const answersShuffled = shuffleArray(qObj.answers);
 
     gameContainer.innerHTML = `
       <div class="game-section">
         <h3>${currentGameName} Quiz</h3>
-        <div class="level-indicator">Level: ${gameState.currentLevel} | Question: ${gameState.questionIndex + 1} / ${totalQ}</div>
+        <div class="level-indicator">Level: ${gameState.currentLevel} | Question: ${(gameState.questionIndex % totalQuestionsPerLevel) + 1} / ${totalQuestionsPerLevel}</div>
         <div class="game-content">
           <div class="question">${qObj.question}</div>
           <div class="answers"></div>
@@ -789,18 +858,17 @@
       const btn = document.createElement('button');
       btn.className = 'answer-btn';
       btn.textContent = answer;
-
       btn.onclick = () => {
-        if (btn.disabled) return;
+        if(btn.disabled) return;
         Array.from(answersDiv.children).forEach(b => b.disabled = true);
 
-        if (answer === qObj.correct) {
+        if(answer === qObj.correct) {
           btn.classList.add('correct');
           gameState.score++;
         } else {
           btn.classList.add('incorrect');
           Array.from(answersDiv.children).forEach(b => {
-            if (b.textContent === qObj.correct) b.classList.add('correct');
+            if(b.textContent === qObj.correct) b.classList.add('correct');
           });
         }
 
@@ -809,32 +877,25 @@
           renderGame();
         }, 1500);
       };
-
       answersDiv.appendChild(btn);
     });
   }
 
-  createTabs();
-  resetGame();
+  // Initial setup
+  renderGameTabs();
   renderGame();
 
-  // Smooth nav scroll & active link highlight
-  const navLinks = document.querySelectorAll('nav a.nav-link');
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
+  // Nav link highlighting on page sections scroll (optional)
+  document.querySelectorAll('nav a.nav-link').forEach(link => {
+    link.onclick = e => {
       e.preventDefault();
-      const targetID = link.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetID);
-      if(targetSection) {
-        window.scrollTo({
-          top: targetSection.offsetTop - 60,
-          behavior: 'smooth'
-        });
-      }
-      navLinks.forEach(l => l.classList.remove('active'));
+      const targetId = link.getAttribute('href').substring(1);
+      document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('nav a.nav-link').forEach(a => a.classList.remove('active'));
       link.classList.add('active');
-    });
+    };
   });
+
 </script>
 
 </body>
