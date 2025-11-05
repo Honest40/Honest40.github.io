@@ -1,49 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tap-to-Avoid — HB Games Zambia</title>
-<style>
-body{margin:0;overflow:hidden;background:#111;color:#fff;font-family:Segoe UI,Roboto,Arial}
-#score{position:fixed;top:10px;left:10px;font-size:20px}
-canvas{display:block;margin:0 auto;background:#222}
-</style>
+  <meta charset="utf-8">
+  <title>Daily Design Challenge – HB Graphics Zambia</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; text-align:center; margin:0; padding:30px; background:#f0f0f0; }
+    #challenge { font-size:24px; margin:20px; }
+    #timer { font-size:20px; color:#555; }
+    #startBtn { padding:15px 30px; font-size:20px; }
+  </style>
 </head>
 <body>
-<div id="score">0</div>
-<canvas id="game" width="360" height="480"></canvas>
-<script>
-const c=document.getElementById('game'),ctx=c.getContext('2d');
-let player={x:40,y:400,w:30,h:30,vy:0,onGround:true};
-let obstacles=[],score=0,speed=4,gameOver=false;
-function addObstacle(){
-  obstacles.push({x:c.width,w:30,h:30});
-}
-function reset(){
-  player.y=400;player.vy=0;obstacles=[];score=0;speed=4;gameOver=false;
-}
-function update(){
-  if(gameOver)return;
-  ctx.fillStyle="#222";ctx.fillRect(0,0,c.width,c.height);
-  player.vy+=0.8;player.y+=player.vy;
-  if(player.y>400){player.y=400;player.vy=0;player.onGround=true;}
-  ctx.fillStyle="#2dbd8b";ctx.fillRect(player.x,player.y,player.w,player.h);
-  if(Math.random()<0.02)addObstacle();
-  for(let i=0;i<obstacles.length;i++){
-    let o=obstacles[i];o.x-=speed;
-    ctx.fillStyle="#f04";ctx.fillRect(o.x,430,o.w,o.h);
-    if(o.x+o.w<0){obstacles.splice(i,1);score++;speed+=0.01;}
-    if(o.x<player.x+player.w && o.x+o.w>player.x && 430<player.y+player.h){gameOver=true;}
-  }
-  document.getElementById('score').innerText=score;
-  requestAnimationFrame(update);
-}
-window.addEventListener('touchstart',()=>{
-  if(gameOver){reset();update();return;}
-  if(player.onGround){player.vy=-14;player.onGround=false;}
-});
-update();
-</script>
+  <h1>Daily Design Challenge</h1>
+  <div id="challenge">Click “Start” for today’s challenge!</div>
+  <div id="timer"></div>
+  <button id="startBtn">Start</button>
+
+  <script>
+    const challenges = [
+      "Design a simple logo for a coffee shop in 10 minutes.",
+      "Create a social-media post for a vehicle wrap sale in 8 minutes.",
+      "Design a t-shirt graphic that says “Zambia Creative” in 12 minutes."
+    ];
+    let selected = "";
+    let seconds = 0;
+    document.getElementById('startBtn').addEventListener('click', ()=>{
+      selected = challenges[Math.floor(Math.random()*challenges.length)];
+      seconds = 10 * 60; // 10 minutes
+      document.getElementById('challenge').textContent = selected;
+      document.getElementById('timer').textContent = formatTime(seconds);
+      const interval = setInterval(()=>{
+        if(seconds <= 0) {
+          clearInterval(interval);
+          alert("Time's up! Take a screenshot of your work and share.");
+          document.getElementById('timer').textContent = "Done!";
+        } else {
+          seconds--;
+          document.getElementById('timer').textContent = formatTime(seconds);
+        }
+      },1000);
+    });
+    function formatTime(s) {
+      const m = Math.floor(s/60), r = s%60;
+      return m + ":" + (r<10?"0":"") + r;
+    }
+  </script>
 </body>
 </html>
