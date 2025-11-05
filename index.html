@@ -28,7 +28,7 @@
       letter-spacing: 1px;
     }
     main {
-      max-width: 500px;
+      max-width: 550px;
       margin: 20px auto;
       background: #fff;
       border: 2px solid #ff0000;
@@ -90,7 +90,7 @@
   <header>
     <img src="hb_logo.png" alt="HB Graphics Logo" />
     <h1>HB Graphics Zambia</h1>
-    <p style="color:#fff;">Graphic Design | Branding | Printing | Laser Engraving | Web Solutions</p>
+    <p style="color:#fff;">Graphic Design | Branding | Printing | Laser Engraving | Web & App Solutions</p>
   </header>
 
   <main>
@@ -103,9 +103,16 @@
         <option value="">-- Choose a service --</option>
         <option>Logo Design</option>
         <option>Business Card Design</option>
-        <option>Flyer Design</option>
+        <option>Flyer Design & Printing</option>
         <option>Brochure Design</option>
         <option>Poster/Banner Design</option>
+        <option>PVC Banner Printing</option>
+        <option>Vinyl Sticker Printing</option>
+        <option>X Banner Stand</option>
+        <option>Pull-up Banner</option>
+        <option>Backdrop Banner</option>
+        <option>Telescopic Flag</option>
+        <option>Paper Flyer/Banner Printing</option>
         <option>T-shirt Printing (Round Neck)</option>
         <option>T-shirt Printing (Golf)</option>
         <option>T-shirt Printing (Corporate)</option>
@@ -118,6 +125,9 @@
         <option>Web Design</option>
         <option>Web Development</option>
         <option>Portfolio Website Design</option>
+        <option>Application Design</option>
+        <option>Application Development</option>
+        <option>Android Application Development</option>
       </select>
 
       <label for="details">Project Details</label>
@@ -134,11 +144,11 @@
 
       <div class="payment">
         <b>💳 Payment Method:</b><br>
-        Airtel Money: <b>+260 776942402</b><br>
-        <small>Confirm your order via WhatsApp before payment.</small>
+        Airtel Money: <b>+260 776942402</b> (Account Name: <b>Honest Bulilu</b>)<br>
+        <small>Confirm your order via WhatsApp or Email before payment.</small>
       </div>
 
-      <button type="button" onclick="sendToWhatsApp()">Send Order on WhatsApp</button>
+      <button type="button" onclick="sendOrder()">Send Order (WhatsApp & Email)</button>
     </form>
   </main>
 
@@ -147,7 +157,7 @@
   </footer>
 
   <script>
-    function sendToWhatsApp() {
+    function sendOrder() {
       const name = document.getElementById("name").value.trim();
       const service = document.getElementById("service").value;
       const details = document.getElementById("details").value.trim();
@@ -168,15 +178,33 @@
         `Details: ${details || 'N/A'}%0A` +
         `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}%0A` +
         `Deadline: ${deadline || 'Not specified'}%0A%0A` +
-        `Payment: Airtel Money (+260 776942402)%0A` +
+        `Payment: Airtel Money (+260 776942402, Account Name: Honest Bulilu)%0A` +
         `Please confirm my order.%0A`;
 
+      // WhatsApp
       const whatsappNumber = "260776942402";
-      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(url, "_blank");
+      const waURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(waURL, "_blank");
+
+      // Email
+      const email = "hbforlife40@gmail.com";
+      const subject = encodeURIComponent("New Order from HB Graphics Zambia Website");
+      const body = encodeURIComponent(
+        `Hello HB Graphics Zambia,\n\n` +
+        `You have a new order request:\n\n` +
+        `Name: ${name}\n` +
+        `Service: ${service}\n` +
+        `Details: ${details || 'N/A'}\n` +
+        `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}\n` +
+        `Deadline: ${deadline || 'Not specified'}\n\n` +
+        `Payment: Airtel Money (+260 776942402, Account Name: Honest Bulilu)\n\n` +
+        `Please confirm the order.`
+      );
+      const mailtoURL = `mailto:${email}?subject=${subject}&body=${body}`;
+      window.open(mailtoURL, "_blank");
 
       if (fileInput.files.length > 0) {
-        alert("Note: WhatsApp doesn't auto-attach files — please attach your file manually after chat opens.");
+        alert("Note: WhatsApp and Email may not auto-attach files — please attach manually if needed.");
       }
     }
   </script>
