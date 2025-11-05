@@ -1,3 +1,250 @@
+/* questions.js
+   Programmatically generates 100 questions per category and attaches them to window.generatedGames
+   Usage: include <script src="questions.js"></script> before your main script, then use:
+     const allGames = window.generatedGames;
+*/
+
+(function () {
+  // Utility helpers
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // Create distractors generator: create plausible wrong answers from pools
+  function makeDistractors(correct, pool, count = 3) {
+    // ensure we don't include the correct one
+    const candidates = pool.filter(x => x !== correct);
+    return shuffle(candidates).slice(0, count);
+  }
+
+  // Generic question builder that ensures 4 answers with the correct one placed among them
+  function buildQuestion(text, correct, distractorPool) {
+    const distractors = makeDistractors(correct, distractorPool, 3);
+    const answers = shuffle([correct, ...distractors]);
+    return { question: text, answers, correct };
+  }
+
+  // Category-specific content pools
+  const graphicTools = ["Adobe Illustrator", "Photoshop", "InDesign", "CorelDRAW", "Affinity Designer", "GIMP", "Sketch", "Figma", "Canva", "Inkscape"];
+  const colorModels = ["RGB", "CMYK", "HSV", "LAB"];
+  const fileFormats = ["SVG", "PNG", "JPEG", "PDF", "EPS", "AI"];
+  const typographyTerms = ["kerning", "leading", "tracking", "baseline", "serif", "sans-serif", "x-height"];
+  const brandingConcepts = ["consistency", "voice", "positioning", "identity", "tone", "logo", "palette", "typography"];
+  const marketingTerms = ["SEO", "PPC", "CTA", "conversion", "engagement", "reach", "impressions"];
+  const socialPlatforms = ["Facebook", "Instagram", "LinkedIn", "Twitter", "TikTok", "Pinterest", "YouTube"];
+  const colors = ["red", "blue", "green", "yellow", "orange", "purple", "black", "white", "gray", "gold"];
+  const emotions = ["trust", "energy", "calm", "luxury", "playfulness", "urgency", "growth", "safety", "happiness"];
+  const codingLangs = ["JavaScript", "Python", "Java", "C", "C++", "C#", "Ruby", "Go", "PHP", "Swift"];
+  const codingConcepts = ["loop", "variable", "function", "conditional", "array", "object", "class", "recursion", "algorithm", "debugging"];
+  const mlConcepts = ["supervised learning", "unsupervised learning", "reinforcement learning", "overfitting", "underfitting", "gradient descent", "neural network", "feature", "label", "classification"];
+
+  // Build dynamic question generators for each category
+  function generateGraphicDesign(n) {
+    const pool = [];
+    const distractorPool = [...graphicTools, ...fileFormats, ...typographyTerms, ...colorModels];
+    for (let i = 0; i < n; i++) {
+      const t = i % 6;
+      if (t === 0) {
+        // Tool recognition question
+        const correct = pick(graphicTools);
+        pool.push(buildQuestion(`Which software is commonly used for vector graphics?`, correct, graphicTools));
+      } else if (t === 1) {
+        // File format
+        const correct = pick(fileFormats);
+        pool.push(buildQuestion(`Which file format is best for a scalable logo?`, "SVG", distractorPool));
+      } else if (t === 2) {
+        // Color model question
+        pool.push(buildQuestion(`Which color model is used for web/display?`, "RGB", colorModels));
+      } else if (t === 3) {
+        // Typography
+        const correct = pick(typographyTerms);
+        pool.push(buildQuestion(`Which term describes the spacing between letters?`, "kerning", typographyTerms));
+      } else if (t === 4) {
+        // Printing DPI / resolution
+        pool.push(buildQuestion(`What does DPI stand for in printing?`, "Dots Per Inch", ["Dots Per Inch","Design Per Image","Dots Per Image","Digital Print Index"]));
+      } else {
+        // Design principle
+        pool.push(buildQuestion(`Which principle focuses on creating balance in a layout?`, "symmetry", ["contrast","alignment","proximity","symmetry"]));
+      }
+    }
+    return pool;
+  }
+
+  function generateColorCombinations(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const c1 = pick(colors);
+      let c2 = pick(colors);
+      while (c2 === c1) c2 = pick(colors);
+      pool.push(buildQuestion(`Which color pairs well with ${c1} for high contrast?`, "white", ["black","white","gold","gray"]));
+    }
+    return pool;
+  }
+
+  function generateColorMeaning(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const color = pick(colors);
+      const meaning = (color === "blue") ? "trust & calm" : (color === "green") ? "nature & growth" : (color === "red") ? "energy & urgency" : (color === "yellow") ? "optimism & attention" : pick(emotions);
+      pool.push(buildQuestion(`What does the color ${color} commonly represent in branding?`, meaning, emotions));
+    }
+    return pool;
+  }
+
+  function generateBrandColorSuggestions(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const industry = pick(["health", "luxury", "food", "tech", "kids", "finance", "sports", "education"]);
+      const correct = (industry === "health") ? "green" : (industry === "luxury") ? "gold" : (industry === "kids") ? "bright multicolor" : (industry === "tech") ? "blue" : (industry === "finance") ? "navy/blue" : (industry === "food") ? "red/orange" : "red";
+      pool.push(buildQuestion(`Which color is a good primary color for a ${industry} brand?`, correct, colors));
+    }
+    return pool;
+  }
+
+  function generateMarketingBranding(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const t = i % 4;
+      if (t === 0) pool.push(buildQuestion(`What does CTA stand for in marketing?`, "Call To Action", ["Call To Action","Customer To Acquire","Content Target Audience","Click To Advertise"]));
+      else if (t === 1) pool.push(buildQuestion(`What is 'brand consistency'?`, "Using the same style across channels", ["Using the same style across channels","Changing logo often","No logo at all","Using different fonts for each ad"]));
+      else if (t === 2) pool.push(buildQuestion(`What is conversion rate?`, "Visitors who take a desired action", ["Visitors who take a desired action","Total page views","Ad clicks only","Register users"]));
+      else pool.push(buildQuestion(`What does SEO help improve?`, "Search engine rankings", ["Search engine rankings","Ad creative","Product cost","Office layout"]));
+    }
+    return pool;
+  }
+
+  function generateDigitalMarketing(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const t = i % 3;
+      if (t === 0) pool.push(buildQuestion(`What does PPC stand for?`, "Pay Per Click", ["Pay Per Click","Post Per Click","Price Per Customer","Public Paid Content"]));
+      else if (t === 1) pool.push(buildQuestion(`Which content type tends to perform best on social platforms?`, "Videos", ["Videos","Plain text only","PDFs","Static images"]));
+      else pool.push(buildQuestion(`What is SEO used for?`, "Search Engine Optimization", ["Search Engine Optimization","Social Event Organizer","Sales Execution Order","Server Error Output"]));
+    }
+    return pool;
+  }
+
+  function generateSocialMediaMarketing(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const t = i % 2;
+      if (t === 0) pool.push(buildQuestion(`Which platform is best for professional B2B marketing?`, "LinkedIn", socialPlatforms));
+      else pool.push(buildQuestion(`What does engagement mean on social media?`, "Likes, comments & shares", ["Likes, comments & shares","Page visits only","Total impressions","Registered users"]));
+    }
+    return pool;
+  }
+
+  function generateLogoDesignPrinciples(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const t = i % 2;
+      if (t === 0) pool.push(buildQuestion(`What makes a logo effective?`, "Simple and memorable", ["Simple and memorable","Complex and detailed","Animated always","Text-only always"]));
+      else pool.push(buildQuestion(`Why test a logo in black & white?`, "Check versatility", ["Check versatility","Because color doesn't matter","To hide flaws","To always print cheap"]));
+    }
+    return pool;
+  }
+
+  function generateCodingLanguages(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const lang = pick(codingLangs);
+      pool.push(buildQuestion(`Which language is primarily used for web browsers?`, "JavaScript", codingLangs));
+    }
+    return pool;
+  }
+
+  function generateCodingTechniques(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const concept = pick(codingConcepts);
+      pool.push(buildQuestion(`What is a ${concept}?`, (concept === "loop") ? "Repeating code" : (concept === "variable") ? "A storage for values" : "A programming concept", ["A programming concept","A styling rule","A font type","A color model"]));
+    }
+    return pool;
+  }
+
+  function generateMachineLearning(n) {
+    const pool = [];
+    for (let i = 0; i < n; i++) {
+      const t = i % mlConcepts.length;
+      const correct = mlConcepts[t];
+      pool.push(buildQuestion(`Which of the following relates to machine learning concept: ${correct}?`, correct, mlConcepts));
+    }
+    return pool;
+  }
+
+  function generateEasyEnglish(n) {
+    const pool = [];
+    const qPairs = [
+      {q:"Plural of 'child'?", a:"Children"},
+      {q:"Past tense of 'go'?", a:"Went"},
+      {q:"Opposite of 'hot'?", a:"Cold"},
+      {q:"Which is a greeting?", a:"Hello"},
+      {q:"Which is a noun: 'apple' or 'run'?", a:"Apple"}
+    ];
+    // repeat with small variations
+    for(let i=0;i<n;i++){
+      const p = qPairs[i % qPairs.length];
+      pool.push(buildQuestion(p.q, p.a, ["Childs","Goed","Warm","Goodbye","Run"]));
+    }
+    return pool;
+  }
+
+  // Map of category -> generator
+  const generators = {
+    "Graphic Design": generateGraphicDesign,
+    "Color Combinations": generateColorCombinations,
+    "Color Meaning": generateColorMeaning,
+    "Brand Color Suggestions": generateBrandColorSuggestions,
+    "Marketing & Branding": generateMarketingBranding,
+    "Digital Marketing": generateDigitalMarketing,
+    "Social Media Marketing": generateSocialMediaMarketing,
+    "Logo Design Principles": generateLogoDesignPrinciples,
+    "Coding Languages": generateCodingLanguages,
+    "Coding Techniques": generateCodingTechniques,
+    "Machine Learning": generateMachineLearning,
+    "Easy English": generateEasyEnglish
+  };
+
+  // Build generatedGames with 100 questions per category
+  const generatedGames = {};
+  const QUESTIONS_PER_CAT = 100;
+
+  Object.keys(generators).forEach(cat => {
+    try {
+      generatedGames[cat] = generators[cat](QUESTIONS_PER_CAT);
+      // Do a small normalization: ensure each question has 4 answers
+      generatedGames[cat] = generatedGames[cat].map(q => {
+        const answers = q.answers.slice(0,4);
+        // if fewer than 4 answers, pad with shuffled plausible items
+        if (answers.length < 4) {
+          const padPool = [].concat(graphicTools, colorModels, fileFormats, codingLangs, colors).filter(Boolean);
+          while (answers.length < 4) {
+            const candidate = pick(padPool);
+            if (!answers.includes(candidate)) answers.push(candidate);
+          }
+        }
+        return { question: q.question, answers: shuffle(answers), correct: q.correct };
+      });
+    } catch (e) {
+      // fallback to a small safe set if generator fails
+      generatedGames[cat] = [
+        { question: `Sample question for ${cat}`, answers: ["A","B","C","D"], correct: "A" }
+      ];
+    }
+  });
+
+  // Expose to global
+  window.generatedGames = generatedGames;
+
+  // Compatibility note: If your main script expects "allGames" directly, you can set:
+  // window.allGames = window.generatedGames;
+})();
 // questions.js
 // Generates 100 questions per category by expanding a smaller base set.
 // Exposes ALL_QUESTIONS object for your main HTML script to use.
