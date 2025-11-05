@@ -1,902 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>HB Graphics Interactive Learning & AI Assistant</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>HB Graphics — Honest (AI) & Infinite Games</title>
 <style>
-  /* Reset & basics */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9f9f9;
-    color: #222;
-    line-height: 1.4;
-  }
-  a {
-    color: #d2232a;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* Header with white background, no logo */
-  header {
-    background: white;
-    padding: 12px 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #d2232a; /* red accent */
-    font-weight: 700;
-  }
-
-  /* Navigation */
-  nav {
-    display: flex;
-    justify-content: center;
-    background: #00275e; /* navy blue */
-    padding: 8px 0;
-    flex-wrap: wrap;
-  }
-  nav a.nav-link {
-    color: white;
-    font-weight: 600;
-    margin: 6px 12px;
-    font-size: 1rem;
-    padding: 6px 12px;
-    border-radius: 4px;
-    transition: background-color 0.25s ease;
-  }
-  nav a.nav-link.active,
-  nav a.nav-link:hover {
-    background: #d2232a; /* red */
-  }
-
-  /* Main container */
-  main {
-    max-width: 900px;
-    margin: 12px auto 60px auto;
-    padding: 0 12px;
-  }
-
-  section {
-    background: white;
-    padding: 14px 18px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  }
-
-  section h2 {
-    font-size: 1.4rem;
-    margin-bottom: 12px;
-    color: #00275e;
-    font-weight: 700;
-  }
-
-  /* Services cards */
-  #servicesContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 14px;
-  }
-  .service-card {
-    background: #fafafa;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px 14px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .service-card h3 {
-    margin: 0 0 8px 0;
-    color: #d2232a;
-    font-size: 1.1rem;
-  }
-  .service-card p {
-    flex-grow: 1;
-    font-size: 0.9rem;
-    color: #444;
-  }
-  .contact-buttons {
-    margin-top: 12px;
-    display: flex;
-    justify-content: space-around;
-  }
-  .contact-buttons button {
-    background-color: #00275e;
-    color: white;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 25px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    flex: 1;
-    margin: 0 4px;
-    transition: background-color 0.3s ease;
-  }
-  .contact-buttons button:hover {
-    background-color: #d2232a;
-  }
-
-  /* Chat Section */
-  #chatSection {
-    display: flex;
-    flex-direction: column;
-    height: 450px;
-    max-height: 70vh;
-  }
-  #chatMessages {
-    flex-grow: 1;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    background: #fff;
-    font-size: 0.95rem;
-  }
-  .message {
-    max-width: 85%;
-    margin-bottom: 8px;
-    padding: 8px 12px;
-    border-radius: 18px;
-    word-wrap: break-word;
-  }
-  .message.ai {
-    background-color: #f0f0f0;
-    color: #222;
-    align-self: flex-start;
-  }
-  .message.user {
-    background-color: #d2232a;
-    color: white;
-    align-self: flex-end;
-  }
-  #chatInputContainer {
-    margin-top: 8px;
-    display: flex;
-    gap: 8px;
-  }
-  #chatInput {
-    flex-grow: 1;
-    padding: 10px 14px;
-    font-size: 1rem;
-    border-radius: 25px;
-    border: 1px solid #ccc;
-    outline: none;
-  }
-  #chatSendBtn {
-    background-color: #d2232a;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    font-size: 1rem;
-    border-radius: 25px;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background-color 0.3s ease;
-  }
-  #chatSendBtn:hover {
-    background-color: #a11a20;
-  }
-
-  #chatContactButtons {
-    margin-top: 12px;
-    text-align: center;
-  }
-  #chatContactButtons button {
-    background:#25D366;
-    color:white;
-    border:none;
-    padding:8px 15px;
-    border-radius:25px;
-    margin: 0 8px;
-    cursor:pointer;
-    font-size: 0.9rem;
-  }
-  #chatContactButtons button:nth-child(2) {
-    background:#0072C6;
-  }
-
-  /* Games Section */
-  #gameTabs {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
-  #gameTabs button.nav-link {
-    padding: 8px 14px;
-    margin: 5px 6px;
-    font-size: 0.9rem;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    background: #00275e;
-    color: white;
-    transition: background-color 0.3s ease;
-    user-select: none;
-  }
-  #gameTabs button.nav-link.active,
-  #gameTabs button.nav-link:hover {
-    background-color: #d2232a;
-  }
-
-  #gameContainer {
-    background: #fff;
-    border-radius: 10px;
-    padding: 12px 16px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-    min-height: 320px;
-    font-size: 0.95rem;
-  }
-  .game-section h3 {
-    color: #00275e;
-    font-weight: 700;
-    margin-bottom: 8px;
-    font-size: 1.3rem;
-  }
-  .level-indicator {
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #555;
-  }
-  .game-content .question {
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
-  .game-content .answers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .answer-btn {
-    background: #eee;
-    border: 1.5px solid #ccc;
-    border-radius: 25px;
-    padding: 10px 14px;
-    cursor: pointer;
-    flex: 1 1 45%;
-    min-width: 120px;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-    font-size: 0.9rem;
-    text-align: center;
-  }
-  .answer-btn:hover:not(:disabled) {
-    background-color: #d2232a;
-    color: white;
-    border-color: #a11a20;
-  }
-  .answer-btn:disabled {
-    cursor: default;
-    opacity: 0.75;
-  }
-  .answer-btn.correct {
-    background-color: #28a745 !important;
-    border-color: #218838 !important;
-    color: white !important;
-    font-weight: 700;
-    box-shadow: 0 0 8px #28a745aa;
-  }
-  .answer-btn.incorrect {
-    background-color: #dc3545 !important;
-    border-color: #bd2130 !important;
-    color: white !important;
-    font-weight: 700;
-    box-shadow: 0 0 8px #dc3545aa;
-  }
-
-  /* Buttons in level summary */
-  #nextLevelBtn, #restartBtn {
-    padding: 10px 22px;
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  #nextLevelBtn {
-    background-color: #28a745;
-    color: white;
-  }
-  #nextLevelBtn:hover {
-    background-color: #218838;
-  }
-  #restartBtn {
-    background-color: #E50914;
-    color: white;
-    margin-left: 14px;
-  }
-  #restartBtn:hover {
-    background-color: #b1060f;
-  }
-
-  /* Appreciation section */
-  #appreciation {
-    background: #fff;
-    text-align: center;
-    padding: 14px 16px;
-    border-radius: 10px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-    font-size: 0.9rem;
-    color: #444;
-  }
-  #appreciation a {
-    color: #d2232a;
-    font-weight: 600;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  #appreciation div.donation-buttons {
-    margin-top: 10px;
-  }
-  #appreciation button {
-    background: #00275e;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 25px;
-    cursor: pointer;
-    margin: 6px 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-  }
-  #appreciation button:hover {
-    background-color: #d2232a;
-  }
-
-  /* Responsive tweaks for small mobile */
-  @media (max-width: 480px) {
-    main {
-      margin: 10px 8px 50px 8px;
-      padding: 0 6px;
-      max-width: 100%;
-    }
-    nav a.nav-link {
-      margin: 4px 6px;
-      font-size: 0.85rem;
-      padding: 5px 8px;
-    }
-    #chatInput, #chatSendBtn {
-      font-size: 0.9rem;
-      padding: 8px 12px;
-    }
-    #chatSection {
-      height: 400px;
-      max-height: 60vh;
-    }
-    .service-card {
-      padding: 8px 10px;
-    }
-    .service-card h3 {
-      font-size: 1rem;
-    }
-    .service-card p {
-      font-size: 0.85rem;
-    }
-    .answer-btn {
-      flex: 1 1 100%;
-      min-width: auto;
-      font-size: 0.85rem;
-      padding: 8px 12px;
-    }
-    #gameContainer {
-      font-size: 0.9rem;
-      min-height: 280px;
-      padding: 10px 12px;
-    }
-  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:#f9f9f9;color:#222}
+  header{background:#fff;padding:12px 18px;box-shadow:0 2px 6px rgba(0,0,0,.08);position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:12px;justify-content:space-between}
+  header h1{margin:0;color:#d2232a;font-size:1.25rem}
+  #musicToggle{background:#00275e;color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+  nav{display:flex;justify-content:center;background:#00275e;padding:8px 6px;flex-wrap:wrap;gap:6px}
+  nav a.nav-link{color:#fff;padding:8px 12px;border-radius:6px;font-weight:600;font-size:.95rem;background:transparent}
+  nav a.nav-link.active,nav a.nav-link:hover{background:#d2232a}
+  main{max-width:980px;margin:14px auto;padding:0 12px 80px}
+  section{background:#fff;border-radius:10px;box-shadow:0 1px 8px rgba(0,0,0,.06);padding:14px 16px;margin-bottom:18px}
+  h2{color:#00275e;margin:0 0 12px 0;font-size:1.15rem}
+  #servicesContainer{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .service-card{background:#fafafa;border:1px solid #e8e8e8;padding:12px;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between}
+  .service-card h3{margin:0 0 8px 0;color:#d2232a}
+  .contact-buttons{display:flex;gap:8px;margin-top:10px}
+  .contact-buttons button{flex:1;border:0;border-radius:22px;padding:8px;background:#00275e;color:#fff;cursor:pointer;font-weight:700}
+  .contact-buttons button:hover{background:#d2232a}
+  #chatSection{display:flex;flex-direction:column;height:440px;max-height:70vh}
+  #chatMessages{flex:1;overflow:auto;border:1px solid #dcdcdc;border-radius:10px;padding:10px;background:#fff}
+  .message{max-width:85%;margin:8px 0;padding:8px 12px;border-radius:18px;word-break:break-word}
+  .message.ai{background:#f2f2f2;align-self:flex-start;color:#111}
+  .message.user{background:#d2232a;color:#fff;align-self:flex-end}
+  #chatInputContainer{display:flex;gap:8px;margin-top:10px}
+  #chatInput{flex:1;padding:10px 14px;border-radius:24px;border:1px solid #ccc;outline:none;font-size:1rem}
+  #chatSendBtn{background:#d2232a;color:#fff;border:0;padding:10px 16px;border-radius:24px;cursor:pointer;font-weight:700}
+  #chatContactButtons{margin-top:10px;display:flex;gap:8px;justify-content:center}
+  #gameTabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px}
+  #gameTabs button.nav-link{background:#00275e;color:#fff;padding:8px 12px;border-radius:22px;border:0;cursor:pointer}
+  #gameTabs button.nav-link.active{background:#d2232a}
+  #gameContainer{min-height:320px;padding:12px;border-radius:8px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+  .game-section h3{margin:0 0 8px 0;color:#00275e}
+  .level-indicator{font-weight:600;color:#555;margin-bottom:10px}
+  .game-content .question{font-weight:700;margin-bottom:12px}
+  .game-content .answers{display:flex;gap:10px;flex-wrap:wrap}
+  .answer-btn{background:#ff8c00;color:#fff;border:2px solid rgba(0,0,0,.06);padding:10px 14px;border-radius:16px;cursor:pointer;font-weight:700;flex:1 1 45%;min-width:120px;transition:transform .12s,box-shadow .12s;text-align:center}
+  .answer-btn:hover:not(:disabled){transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+  .answer-btn:disabled{opacity:.7;cursor:default}
+  .answer-btn.correct{background:#28a745!important;box-shadow:0 0 12px rgba(40,167,69,.25)}
+  .answer-btn.incorrect{background:#dc3545!important;box-shadow:0 0 12px rgba(220,53,69,.25)}
+  #appreciation{text-align:center}
+  .donation-buttons{margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .donation-buttons button{background:#00275e;color:#fff;border:0;padding:10px 16px;border-radius:22px;cursor:pointer;font-weight:700}
+  .donation-buttons button:hover{background:#d2232a}
+  @media(max-width:560px){.answer-btn{flex:1 1 100%;min-width:auto}.nav a.nav-link{font-size:.82rem;padding:6px 8px}header h1{font-size:1.05rem}}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>HB Graphics - Learning & AI Assistant</h1>
+  <div style="display:flex;align-items:center;gap:12px">
+    <h1>HB Graphics — Honest (AI) & Learning Hub</h1>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button id="musicToggle">Enable Music</button>
+    <label style="font-size:0.9rem;color:#555;margin-left:6px">Music off by default</label>
+  </div>
 </header>
 
 <nav>
-  <a href="#services" class="nav-link active">Services</a>
-  <a href="#chat" class="nav-link">Chat with Honest</a>
-  <a href="#games" class="nav-link">Games</a>
-  <a href="#appreciation" class="nav-link">Appreciation</a>
+  <a class="nav-link active" href="#services">Services</a>
+  <a class="nav-link" href="#chat">Chat with Honest</a>
+  <a class="nav-link" href="#games">Games</a>
+  <a class="nav-link" href="#appreciation">Appreciation</a>
 </nav>
 
 <main>
   <section id="services">
     <h2>Our Services</h2>
-    <div id="servicesContainer">
-      <!-- Dynamic services cards inserted here -->
-    </div>
+    <div id="servicesContainer"></div>
   </section>
 
   <section id="chat">
-    <h2>AI Chat Assistant</h2>
+    <h2>Chat with Honest (voice + text)</h2>
     <div id="chatSection">
-      <div id="chatMessages"></div>
+      <div id="chatMessages" aria-live="polite"></div>
       <div id="chatInputContainer">
-        <input type="text" id="chatInput" placeholder="Type your message here..." autocomplete="off" />
+        <input id="chatInput" type="text" placeholder="Type your question... (e.g. 'Tell me about logo design')" />
         <button id="chatSendBtn">Send</button>
       </div>
+      <div id="chatContactButtons" style="display:none"></div>
     </div>
   </section>
 
   <section id="games">
-    <h2>Learn with Our Quizzes</h2>
-    <div id="gameTabs"></div>
-    <div id="gameContainer"></div>
+    <h2>Learn with Infinite Games</h2>
+    <div id="gameTabs" role="tablist"></div>
+    <div id="gameContainer" role="region" aria-live="polite"></div>
   </section>
 
   <section id="appreciation">
     <h2>Appreciation & Support</h2>
-    <p>If you appreciate HB Graphics for making this platform, you can donate or contact us for inquiries.</p>
+    <p>If you appreciate HB Graphics and this learning platform, you can contact or appreciate the team below.</p>
     <div class="donation-buttons">
-      <button onclick="window.open('https://wa.me/260776942402', '_blank')">WhatsApp</button>
-      <button onclick="window.location='mailto:hb4life40@gmail.com'">Email</button>
-      <button onclick="alert('Mobile Money Number: 0776942402 (Honest Bulilu)\nPlease send your appreciation here!')">Mobile Money</button>
+      <button onclick="window.open('https://wa.me/260776942402','_blank')">WhatsApp</button>
+      <button onclick="location.href='mailto:hb4life40@gmail.com'">Email</button>
+      <button onclick="alert('Mobile Money Number: 0776942402 (Honest Bulilu)')">Mobile Money</button>
     </div>
   </section>
 </main>
 
 <script>
-  // Services data
-  const services = [
-    {
-      name: "Graphic Design",
-      description: "Logo design, flyers, brochures, business cards, branding materials, social media posts.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Car Branding",
-      description: "Vehicle wraps, decals, vinyl stickers for cars, trucks, and fleets.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Shop Branding",
-      description: "Signage, banners, window decals, promotional materials for shops.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Office Branding",
-      description: "Wall graphics, directional signs, nameplates, office event materials.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Printing Services",
-      description: "T-shirts, mugs, posters, business cards, brochures, custom printing.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Laser Engraving",
-      description: "Personalized gifts, awards, custom designs on wood, glass, and metal.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Digital Marketing",
-      description: "Social media management, content creation, online ads, and strategy.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    },
-    {
-      name: "Social Media Account Management",
-      description: "Managing your social pages to engage customers and grow your audience.",
-      whatsapp: "https://wa.me/260776942402",
-      email: "mailto:hb4life40@gmail.com"
-    }
-  ];
+/* ---------------------
+   WebAudio ambient music
+   - user must enable (browsers block autoplay)
+   - simple layered soundscape generated programmatically
+   --------------------- */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+let musicNodes = [];
+let musicPlaying = false;
 
-  // Render services cards
-  const servicesContainer = document.getElementById('servicesContainer');
-  services.forEach(service => {
-    const card = document.createElement('div');
-    card.className = 'service-card';
-    card.innerHTML = `
-      <h3>${service.name}</h3>
-      <p>${service.description}</p>
-      <div class="contact-buttons">
-        <button onclick="window.open('${service.whatsapp}', '_blank')">WhatsApp</button>
-        <button onclick="window.open('${service.email}', '_blank')">Email</button>
-      </div>
-    `;
-    servicesContainer.appendChild(card);
+function startAmbientMusic() {
+  if(!AudioCtx) return;
+  if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  if(!audioCtx) audioCtx = new AudioCtx();
+  // prevent multiple starts
+  if(musicPlaying) return;
+  musicPlaying = true;
+
+  // create ambient pad (two detuned saws through lowpass)
+  const padGain = audioCtx.createGain(); padGain.gain.value = 0.08;
+  const padOsc1 = audioCtx.createOscillator(); padOsc1.type = 'sawtooth'; padOsc1.frequency.value = 110;
+  const padOsc2 = audioCtx.createOscillator(); padOsc2.type = 'sawtooth'; padOsc2.frequency.value = 112;
+  const padLP = audioCtx.createBiquadFilter(); padLP.type = 'lowpass'; padLP.frequency.value = 600;
+  padOsc1.connect(padLP); padOsc2.connect(padLP); padLP.connect(padGain); padGain.connect(audioCtx.destination);
+  padOsc1.start(); padOsc2.start();
+
+  // slow moving gentle noise/drone (via oscillator on low freq)
+  const drGain = audioCtx.createGain(); drGain.gain.value = 0.02;
+  const drOsc = audioCtx.createOscillator(); drOsc.type='sine'; drOsc.frequency.value=0.25; // LFO feel
+  const drAmp = audioCtx.createGain(); drAmp.gain.value = 40;
+  drOsc.connect(drAmp); drAmp.connect(padLP.frequency);
+  drOsc.start();
+
+  // soft subtle melody loop (scheduled)
+  const melodyGain = audioCtx.createGain(); melodyGain.gain.value = 0.05; melodyGain.connect(audioCtx.destination);
+  const melodyOsc = audioCtx.createOscillator(); melodyOsc.type = 'sine';
+  melodyOsc.connect(melodyGain);
+  melodyOsc.start();
+
+  // schedule simple notes change every 1.6s
+  let melodyIndex = 0;
+  const notes = [220, 246.94, 196, 174.61]; // A, B, G, F
+  const melodyTimer = setInterval(()=> {
+    const n = notes[melodyIndex % notes.length];
+    melodyOsc.frequency.setTargetAtTime(n, audioCtx.currentTime, 0.02);
+    melodyIndex++;
+  }, 1600);
+
+  musicNodes = [padOsc1,padOsc2,drOsc,melodyOsc,padGain,drGain,melodyGain, padLP, melodyTimer];
+}
+
+function stopAmbientMusic() {
+  if(!audioCtx || !musicPlaying) return;
+  // stop oscillators and clear timers
+  try {
+    musicNodes.forEach(node=>{
+      if(node && node.stop) {
+        try { node.stop(); } catch(e){}
+      }
+      if(node && node.disconnect) {
+        try { node.disconnect(); } catch(e){}
+      }
+    });
+  } catch(e){}
+  // clear scheduled timers
+  musicNodes.forEach(n=>{ if(typeof n === 'number') clearInterval(n); });
+  musicNodes = [];
+  musicPlaying = false;
+  // do not close audioCtx to allow resume
+}
+
+/* ---------------
+   small utility tones for UI
+   --------------- */
+function playTone(freq=660,type='sine',dur=0.08,vol=0.06){
+  if(!AudioCtx) return;
+  if(!audioCtx) audioCtx = new AudioCtx();
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.type = type; o.frequency.value = freq;
+  g.gain.value = vol;
+  o.connect(g); g.connect(audioCtx.destination);
+  o.start();
+  o.stop(audioCtx.currentTime + dur);
+}
+function playClickSound(){ playTone(880,'sine',0.05,0.04); }
+function playCorrectSound(){ playTone(880,'sine',0.06,0.07); setTimeout(()=>playTone(1320,'sine',0.08,0.06),80); }
+function playWrongSound(){ playTone(200,'sawtooth',0.12,0.06); }
+
+/* ----------------------------
+   Services rendering
+   ---------------------------- */
+const services = [
+  {name:"Graphic Design", description:"Logo design, flyers, brochures, business cards, branding materials, social media posts.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Car Branding", description:"Vehicle wraps, decals, vinyl stickers for cars, trucks, and fleets.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Shop Branding", description:"Signage, banners, window decals, promotional materials for shops.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Office Branding", description:"Wall graphics, directional signs, nameplates, office event materials.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Printing Services", description:"T-shirts, mugs, posters, business cards, brochures, custom printing.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Laser Engraving", description:"Personalized gifts, awards, custom designs on wood, glass, and metal.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Digital Marketing", description:"Social media management, content creation, online ads, and strategy.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"},
+  {name:"Social Media Account Management", description:"Managing your social pages to engage customers and grow your audience.", whatsapp:"https://wa.me/260776942402", email:"mailto:hb4life40@gmail.com"}
+];
+
+const servicesContainer = document.getElementById('servicesContainer');
+services.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'service-card';
+  card.innerHTML = `<h3>${s.name}</h3><p>${s.description}</p><div class="contact-buttons">
+    <button onclick="window.open('${s.whatsapp}','_blank')">WhatsApp</button>
+    <button onclick="window.open('${s.email}','_blank')">Email</button>
+  </div>`;
+  servicesContainer.appendChild(card);
+});
+
+/* ----------------------------
+   Chat (Honest) - voice + text
+   ---------------------------- */
+const chatMessages = document.getElementById('chatMessages');
+const chatInput = document.getElementById('chatInput');
+const chatSendBtn = document.getElementById('chatSendBtn');
+const chatContactButtons = document.getElementById('chatContactButtons');
+
+function appendMessage(text,sender='ai'){
+  const div = document.createElement('div');
+  div.className = `message ${sender}`;
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+/* Find a male voice preference, fallback gracefully */
+function findMaleVoice(){
+  const voices = window.speechSynthesis.getVoices() || [];
+  // list of likely male voice names or markers
+  const maleCandidates = ['Male','male','Google UK English Male','Alex','Daniel','Tom','Google US English','Microsoft David','Ryan','Fred'];
+  for(const name of maleCandidates){
+    const v = voices.find(x => x && x.name && x.name.includes(name));
+    if(v) return v;
+  }
+  // fallback: first English male-like voice or just first voice
+  const en = voices.find(v => v.lang && v.lang.startsWith('en'));
+  if(en) return en;
+  return voices[0] || null;
+}
+
+function speakHonest(text){
+  if(!('speechSynthesis' in window)) return;
+  const utter = new SpeechSynthesisUtterance(text);
+  const voice = findMaleVoice();
+  if(voice) utter.voice = voice;
+  utter.rate = 1;
+  utter.pitch = 1;
+  window.speechSynthesis.speak(utter);
+}
+
+/* Chat logic - simple built-in rules; shows contact buttons if fallback */
+function showChatContacts(){
+  if(chatContactButtons.childElementCount) return;
+  chatContactButtons.style.display = 'flex';
+  const w = document.createElement('button'); w.textContent='WhatsApp'; w.onclick=()=>window.open('https://wa.me/260776942402','_blank');
+  const e = document.createElement('button'); e.textContent='Email'; e.onclick=()=>location.href='mailto:hb4life40@gmail.com';
+  chatContactButtons.appendChild(w); chatContactButtons.appendChild(e);
+}
+
+async function getAIReply(message){
+  const m = message.toLowerCase();
+  if(m.includes('hello')||m.includes('hi')) return "Hello — I'm Honest, HB Graphics' assistant. How can I help you with design, printing, or engraving today?";
+  if(m.includes('services')) return "We do logo design, vehicle/shop/office branding, printing, laser engraving, social media management and more. Which service do you need?";
+  if(m.includes('logo')) return "For logos I recommend vector SVG for scalability. Tell me the style you want (minimal, modern, vintage).";
+  if(m.includes('color')) return "Tell me the industry and mood (e.g. energetic, trustworthy) and I'll suggest color combinations.";
+  if(m.includes('price')||m.includes('cost')||m.includes('quote')) return "Please tell me the service, size and quantity (e.g., 100 flyers A5, full color) so I can estimate.";
+  if(m.includes('game')||m.includes('quiz')) return "Pick a quiz below — Graphic Design, Color Combinations, Coding and more. Want me to start one for you?";
+  if(m.trim().length<2) return "Please write your request — I'm ready to help.";
+  showChatContacts();
+  return "I couldn't fully answer that. I'll share contact options so we can continue on WhatsApp or email.";
+}
+
+/* Handle send */
+async function sendMessage(){
+  const text = chatInput.value.trim();
+  if(!text) return;
+  appendMessage(text,'user');
+  playClickSound();
+  chatInput.value='';
+  chatInput.disabled=true; chatSendBtn.disabled=true;
+  appendMessage('Thinking...','ai');
+  setTimeout(async ()=>{
+    // remove last ai 'Thinking...' message
+    const ais = chatMessages.querySelectorAll('.message.ai');
+    if(ais.length) ais[ais.length-1].remove();
+    const reply = await getAIReply(text);
+    appendMessage(reply,'ai');
+    speakHonest(reply);
+    playToneForAI();
+    chatInput.disabled=false; chatSendBtn.disabled=false; chatInput.focus();
+  },600);
+}
+function playToneForAI(){ playTone(660,'sine',0.09,0.06); setTimeout(()=>playTone(880,'sine',0.08,0.05),90); }
+
+chatSendBtn.addEventListener('click',sendMessage);
+chatInput.addEventListener('keydown',e=>{ if(e.key==='Enter') sendMessage(); });
+
+/* ----------------------------
+   Games: multiple categories, infinite play
+   ---------------------------- */
+const allGames = {
+  "Graphic Design":[
+    {question:"Which software is popular for vector graphics?",answers:["Adobe Illustrator","Photoshop","InDesign","Premiere Pro"],correct:"Adobe Illustrator"},
+    {question:"What does 'RGB' stand for?",answers:["Red Green Blue","Red Grey Black","Ready Go Build","Really Good Brand"],correct:"Red Green Blue"},
+    {question:"Which format is best for logos?",answers:["SVG","JPEG","PNG","GIF"],correct:"SVG"},
+    {question:"What is kerning?",answers:["Spacing between letters","Image resolution","Color saturation","Font style"],correct:"Spacing between letters"},
+    {question:"Which color model is used for printing?",answers:["CMYK","RGB","HSV","LAB"],correct:"CMYK"}
+  ],
+  "Color Combinations":[
+    {question:"Which color pairs strongly with red for contrast?",answers:["White","Purple","Brown","Pink"],correct:"White"},
+    {question:"Safe neutral for bright colors:",answers:["Gray","Neon Green","Hot Pink","Bright Yellow"],correct:"Gray"},
+    {question:"Red and gold usually communicate:",answers:["Luxury & energy","Calmness","Sadness","Coldness"],correct:"Luxury & energy"},
+    {question:"Monochrome palette uses:",answers:["Different shades of same color","Many unrelated colors","Black only","White only"],correct:"Different shades of same color"}
+  ],
+  "Color Meaning":[
+    {question:"Blue commonly communicates:",answers:["Trust & calm","Anger","Excitement","Pain"],correct:"Trust & calm"},
+    {question:"Green often evokes:",answers:["Nature & growth","Fear","Luxury","Urgency"],correct:"Nature & growth"},
+    {question:"Yellow typically signals:",answers:["Optimism & attention","Sadness","Danger only","Luxury"],correct:"Optimism & attention"},
+    {question:"Black in branding means:",answers:["Elegance & power","Playfulness","Childishness","Honesty"],correct:"Elegance & power"}
+  ],
+  "Brand Color Suggestions":[
+    {question:"Color for a health brand?",answers:["Green","Black","Red","Brown"],correct:"Green"},
+    {question:"Color for a luxury brand?",answers:["Gold","Lime","Orange","Neon Pink"],correct:"Gold"},
+    {question:"Color for a children's brand?",answers:["Bright multicolor","Dark gray","Olive","Burgundy"],correct:"Bright multicolor"}
+  ],
+  "Marketing & Branding":[
+    {question:"What is a CTA?",answers:["Call To Action","Customer Tracking App","Content Target Audience","Click Through Average"],correct:"Call To Action"},
+    {question:"Brand consistency is:",answers:["Same style across channels","Changing logo often","No logo at all","Multiple fonts randomly"],correct:"Same style across channels"},
+    {question:"Conversion rate measures:",answers:["Visitors who take a desired action","Number of site pages","Total app installs","Total followers"],correct:"Visitors who take a desired action"}
+  ],
+  "Digital Marketing":[
+    {question:"What is PPC?",answers:["Pay Per Click","Page Performance Check","Product Price Calculation","Public Paid Content"],correct:"Pay Per Click"},
+    {question:"What is SEO?",answers:["Search Engine Optimization","Social Event Organizer","Sales Execution Order","Server Error Output"],correct:"Search Engine Optimization"},
+    {question:"Which content performs best on social platforms?",answers:["Videos","Plain text only","PDFs","Audio files only"],correct:"Videos"}
+  ],
+  "Social Media Marketing":[
+    {question:"Best platform for B2B reach?",answers:["LinkedIn","TikTok","Snapchat","Pinterest"],correct:"LinkedIn"},
+    {question:"Engagement means:",answers:["Likes, comments & shares","Number of employees","Website uptime","Ad spend"],correct:"Likes, comments & shares"}
+  ],
+  "Logo Design Principles":[
+    {question:"A good logo should be:",answers:["Simple & memorable","Extremely complex","Very colorful always","Text-only always"],correct:"Simple & memorable"},
+    {question:"Why test a logo in black & white?",answers:["Check versatility","Because color doesn't matter","To hide details","To confuse customers"],correct:"Check versatility"}
+  ],
+  "Coding Languages":[
+    {question:"Which language runs in the browser?",answers:["JavaScript","Python","C++","Java"],correct:"JavaScript"},
+    {question:"Backend web servers often use?",answers:["Node.js/JavaScript","HTML","CSS","Markdown"],correct:"Node.js/JavaScript"}
+  ],
+  "Coding Techniques":[
+    {question:"What is a loop used for?",answers:["Repeating code","Styling pages","Storing images","Compressing files"],correct:"Repeating code"},
+    {question:"What does an 'if' statement do?",answers:["Conditional execution","Deletes files","Prints images","Creates databases"],correct:"Conditional execution"}
+  ],
+  "Machine Learning":[
+    {question:"Supervised learning needs:",answers:["Labeled data","No data","Only audio","Only images"],correct:"Labeled data"},
+    {question:"Overfitting means:",answers:["Model fits training data too well","Model never trains","Model is perfect","Model is random"],correct:"Model fits training data too well"}
+  ],
+  "Easy English":[
+    {question:"Plural of 'child'?",answers:["Children","Childs","Childes","Child"],correct:"Children"},
+    {question:"Past tense of 'go'?",answers:["Went","Goed","Gone","Going"],correct:"Went"}
+  ]
+};
+
+const gameTabs = document.getElementById('gameTabs');
+const gameContainer = document.getElementById('gameContainer');
+let currentGameName = Object.keys(allGames)[0];
+const totalQuestionsPerLevel = 10;
+let gameState = { currentLevel:1, score:0, questionIndex:0 };
+
+function shuffleArray(arr){ const copy = arr.slice(); for(let i=copy.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [copy[i],copy[j]]=[copy[j],copy[i]] } return copy; }
+
+function renderGameTabs(){
+  gameTabs.innerHTML='';
+  Object.keys(allGames).forEach(name=>{
+    const btn=document.createElement('button');
+    btn.className='nav-link'+(name===currentGameName ? ' active':'' );
+    btn.textContent=name;
+    btn.onclick=()=>{ if(currentGameName!==name){ currentGameName=name; resetGame(); renderGame(); updateTabsActive(); } };
+    gameTabs.appendChild(btn);
   });
+}
+function updateTabsActive(){ Array.from(gameTabs.children).forEach(b=>b.classList.toggle('active', b.textContent===currentGameName)); }
+function resetGame(){ gameState.currentLevel=1; gameState.score=0; gameState.questionIndex=0; }
 
-  // =============== AI Chat ===============
-  const chatMessages = document.getElementById('chatMessages');
-  const chatInput = document.getElementById('chatInput');
-  const chatSendBtn = document.getElementById('chatSendBtn');
+function pickRandomQuestion(category){ const pool = allGames[category]; return pool[Math.floor(Math.random()*pool.length)]; }
 
-  function appendMessage(text, sender = 'ai') {
-    const msgDiv = document.createElement('div');
-    msgDiv.classList.add('message', sender);
-    msgDiv.textContent = text;
-    chatMessages.appendChild(msgDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+function renderGame(){
+  if(gameState.questionIndex>0 && gameState.questionIndex%totalQuestionsPerLevel===0){
+    gameContainer.innerHTML=`<div style="text-align:center"><h3>Level ${gameState.currentLevel} Completed!</h3><p>Your Score: ${gameState.score} / ${totalQuestionsPerLevel}</p><div style="margin-top:12px"><button id="nextLevelBtn" style="background:#28a745;color:#fff;border:0;padding:10px 16px;border-radius:10px;margin-right:10px;cursor:pointer;font-weight:700">Next Level</button><button id="restartBtn" style="background:#E50914;color:#fff;border:0;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:700">Restart</button></div></div>`;
+    document.getElementById('nextLevelBtn').onclick=()=>{ gameState.currentLevel++; gameState.score=0; gameState.questionIndex=0; renderGame(); };
+    document.getElementById('restartBtn').onclick=()=>{ resetGame(); renderGame(); };
+    return;
   }
 
-  // Voice synthesis - male voice selection
-  function speak(text) {
-    if(!('speechSynthesis' in window)) return;
-    const utterance = new SpeechSynthesisUtterance(text);
-    const voices = window.speechSynthesis.getVoices();
-    // Try to find male voice in English, fallback to first voice
-    const maleVoice = voices.find(v => v.lang.startsWith('en') && v.name.toLowerCase().includes('male')) || voices[0];
-    if(maleVoice) utterance.voice = maleVoice;
-    window.speechSynthesis.speak(utterance);
-  }
-
-  // Simulated AI response for demo (replace with API call if needed)
-  async function getAIResponse(message) {
-    // Basic keyword handling for demo purpose
-    const msgLower = message.toLowerCase();
-
-    if(msgLower.includes('services')) {
-      return "I offer graphic design, car branding, shop and office branding, printing, laser engraving, digital marketing, and social media account management. How can I assist you today?";
-    }
-    if(msgLower.includes('hi') || msgLower.includes('hello')) {
-      return "Hello! I'm Honest's AI assistant. How can I help you today?";
-    }
-    if(msgLower.includes('help')) {
-      return "Sure! You can ask me about HB Graphics services, games, or general questions.";
-    }
-    // Fallback echo
-    return "Thanks for your message! I'm here to help with HB Graphics services and learning games.";
-  }
-
-  async function sendMessage() {
-    const msg = chatInput.value.trim();
-    if(!msg) return;
-    appendMessage(msg, 'user');
-    chatInput.value = '';
-    chatInput.disabled = true;
-    chatSendBtn.disabled = true;
-
-    // Simulate AI processing delay
-    setTimeout(async () => {
-      const reply = await getAIResponse(msg);
-      appendMessage(reply, 'ai');
-      speak(reply);
-      chatInput.disabled = false;
-      chatSendBtn.disabled = false;
-      chatInput.focus();
-    }, 700);
-  }
-
-  chatSendBtn.onclick = sendMessage;
-  chatInput.addEventListener('keydown', e => {
-    if(e.key === 'Enter') sendMessage();
-  });
-
-  // =============== Games ===============
-
-  // Quiz questions for each game category
-  const allGames = {
-    "Programming Languages": [
-      {
-        question: "Which language is primarily used for web development?",
-        answers: ["Python", "JavaScript", "C++", "Java"],
-        correct: "JavaScript"
-      },
-      {
-        question: "What language is known for its use in AI and data science?",
-        answers: ["Java", "Python", "Ruby", "Go"],
-        correct: "Python"
-      },
-      {
-        question: "Which language is known for system programming?",
-        answers: ["C", "HTML", "CSS", "SQL"],
-        correct: "C"
-      },
-      {
-        question: "Which language runs primarily in a web browser?",
-        answers: ["JavaScript", "C#", "PHP", "Swift"],
-        correct: "JavaScript"
-      },
-      {
-        question: "Which is a statically typed language?",
-        answers: ["Java", "JavaScript", "Python", "Ruby"],
-        correct: "Java"
-      }
-    ],
-    "Machine Learning": [
-      {
-        question: "What is the main goal of supervised learning?",
-        answers: ["Cluster data", "Predict outputs", "Reduce dimensionality", "Generate data"],
-        correct: "Predict outputs"
-      },
-      {
-        question: "Which algorithm is used for classification?",
-        answers: ["Linear Regression", "Decision Trees", "K-Means", "PCA"],
-        correct: "Decision Trees"
-      },
-      {
-        question: "What does 'overfitting' mean?",
-        answers: [
-          "Model fits training data too well",
-          "Model underperforms on training data",
-          "Model is too simple",
-          "Model never learns"
-        ],
-        correct: "Model fits training data too well"
-      },
-      {
-        question: "Which library is popular for machine learning in Python?",
-        answers: ["TensorFlow", "Django", "React", "Node.js"],
-        correct: "TensorFlow"
-      },
-      {
-        question: "What type of learning uses rewards and punishments?",
-        answers: ["Supervised", "Unsupervised", "Reinforcement", "Deep"],
-        correct: "Reinforcement"
-      }
-    ],
-    "Social Media Marketing": [
-      {
-        question: "What is 'engagement' in social media?",
-        answers: ["Likes and comments", "Followers only", "Number of ads", "Page views"],
-        correct: "Likes and comments"
-      },
-      {
-        question: "Which platform is best for professional networking?",
-        answers: ["Instagram", "LinkedIn", "TikTok", "Snapchat"],
-        correct: "LinkedIn"
-      },
-      {
-        question: "What does 'SEO' stand for?",
-        answers: [
-          "Search Engine Optimization",
-          "Social Engagement Order",
-          "Simple Email Outreach",
-          "Sales Execution Operation"
-        ],
-        correct: "Search Engine Optimization"
-      },
-      {
-        question: "What type of content typically gets highest reach?",
-        answers: ["Videos", "Text only", "Static images", "Emails"],
-        correct: "Videos"
-      },
-      {
-        question: "What is a 'call to action'?",
-        answers: [
-          "A prompt to users to act",
-          "A background music",
-          "A type of advertisement",
-          "A social media algorithm"
-        ],
-        correct: "A prompt to users to act"
-      }
-    ],
-    "Graphic Design": [
-      {
-        question: "Which software is popular for vector graphics?",
-        answers: ["Adobe Illustrator", "Photoshop", "InDesign", "Premiere Pro"],
-        correct: "Adobe Illustrator"
-      },
-      {
-        question: "What does 'RGB' stand for?",
-        answers: [
-          "Red Green Blue",
-          "Red Grey Black",
-          "Random Graphic Bits",
-          "Ready Go Build"
-        ],
-        correct: "Red Green Blue"
-      },
-      {
-        question: "Which file format is best for logos?",
-        answers: ["JPEG", "PNG", "SVG", "BMP"],
-        correct: "SVG"
-      },
-      {
-        question: "What is 'kerning'?",
-        answers: [
-          "Spacing between letters",
-          "Image resolution",
-          "Color saturation",
-          "Font style"
-        ],
-        correct: "Spacing between letters"
-      },
-      {
-        question: "Which color model is used for printing?",
-        answers: ["RGB", "CMYK", "HSV", "LAB"],
-        correct: "CMYK"
-      }
-    ],
-    "Easy English": [
-      {
-        question: "What is the plural of 'child'?",
-        answers: ["Childs", "Childes", "Children", "Child"],
-        correct: "Children"
-      },
-      {
-        question: "What is the past tense of 'go'?",
-        answers: ["Went", "Goed", "Gone", "Going"],
-        correct: "Went"
-      },
-      {
-        question: "Which word is a noun?",
-        answers: ["Run", "Beautiful", "Apple", "Quickly"],
-        correct: "Apple"
-      },
-      {
-        question: "What is the opposite of 'hot'?",
-        answers: ["Cold", "Warm", "Cool", "Boiling"],
-        correct: "Cold"
-      },
-      {
-        question: "Which is a greeting?",
-        answers: ["Goodbye", "Hello", "Sorry", "Please"],
-        correct: "Hello"
-      }
-    ]
-  };
-
-  // Game state variables
-  let currentGameName = "Programming Languages";
-  const totalQuestionsPerLevel = 10;
-
-  let gameState = {
-    currentLevel: 1,
-    score: 0,
-    questionIndex: 0
-  };
-
-  // DOM references
-  const gameTabs = document.getElementById('gameTabs');
-  const gameContainer = document.getElementById('gameContainer');
-
-  // Shuffle helper
-  function shuffleArray(arr) {
-    let array = arr.slice();
-    for(let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  // Render game tabs
-  function renderGameTabs() {
-    gameTabs.innerHTML = '';
-    Object.keys(allGames).forEach(gameName => {
-      const btn = document.createElement('button');
-      btn.className = 'nav-link' + (gameName === currentGameName ? ' active' : '');
-      btn.textContent = gameName;
-      btn.onclick = () => {
-        if(currentGameName !== gameName) {
-          currentGameName = gameName;
-          resetGame();
-          renderGame();
-          updateTabsActive();
-        }
-      };
-      gameTabs.appendChild(btn);
-    });
-  }
-
-  // Update tabs active styling
-  function updateTabsActive() {
-    Array.from(gameTabs.children).forEach(btn => {
-      btn.classList.toggle('active', btn.textContent === currentGameName);
-    });
-  }
-
-  // Reset game state
-  function resetGame() {
-    gameState.currentLevel = 1;
-    gameState.score = 0;
-    gameState.questionIndex = 0;
-  }
-
-  // Render the game question or level summary
-  function renderGame() {
-    // If level completed, show summary with buttons
-    if(gameState.questionIndex > 0 && gameState.questionIndex % totalQuestionsPerLevel === 0) {
-      const levelScore = gameState.score;
-      gameContainer.innerHTML = `
-        <div style="text-align:center; margin-top:20px;">
-          <h3>Level ${gameState.currentLevel} Completed!</h3>
-          <p>Your Score: ${levelScore} / ${totalQuestionsPerLevel}</p>
-          <button id="nextLevelBtn">Next Level</button>
-          <button id="restartBtn">Restart Game</button>
-        </div>
-      `;
-      document.getElementById('nextLevelBtn').onclick = () => {
-        gameState.currentLevel++;
-        gameState.score = 0;
-        gameState.questionIndex = 0;
-        renderGame();
-      };
-      document.getElementById('restartBtn').onclick = () => {
-        resetGame();
-        renderGame();
-      };
-      return;
-    }
-
-    // Pick a random question for the current game
-    const questionsArray = allGames[currentGameName];
-    const qObj = questionsArray[Math.floor(Math.random() * questionsArray.length)];
-    const answersShuffled = shuffleArray(qObj.answers);
-
-    gameContainer.innerHTML = `
-      <div class="game-section">
-        <h3>${currentGameName} Quiz</h3>
-        <div class="level-indicator">Level: ${gameState.currentLevel} | Question: ${(gameState.questionIndex % totalQuestionsPerLevel) + 1} / ${totalQuestionsPerLevel}</div>
-        <div class="game-content">
-          <div class="question">${qObj.question}</div>
-          <div class="answers"></div>
-        </div>
-      </div>
-    `;
-
-    const answersDiv = gameContainer.querySelector('.answers');
-
-    answersShuffled.forEach(answer => {
-      const btn = document.createElement('button');
-      btn.className = 'answer-btn';
-      btn.textContent = answer;
-      btn.onclick = () => {
-        if(btn.disabled) return;
-        Array.from(answersDiv.children).forEach(b => b.disabled = true);
-
-        if(answer === qObj.correct) {
-          btn.classList.add('correct');
-          gameState.score++;
-        } else {
-          btn.classList.add('incorrect');
-          Array.from(answersDiv.children).forEach(b => {
-            if(b.textContent === qObj.correct) b.classList.add('correct');
-          });
-        }
-
-        setTimeout(() => {
-          gameState.questionIndex++;
-          renderGame();
-        }, 1500);
-      };
-      answersDiv.appendChild(btn);
-    });
-  }
-
-  // Initial setup
-  renderGameTabs();
-  renderGame();
-
-  // Nav link highlighting on page sections scroll (optional)
-  document.querySelectorAll('nav a.nav-link').forEach(link => {
-    link.onclick = e => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href').substring(1);
-      document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
-      document.querySelectorAll('nav a.nav-link').forEach(a => a.classList.remove('active'));
-      link.classList.add('active');
+  const qObj = pickRandomQuestion(currentGameName);
+  const answers = shuffleArray(qObj.answers);
+  gameContainer.innerHTML=`<div class="game-section"><h3>${currentGameName} Quiz</h3><div class="level-indicator">Level: ${gameState.currentLevel} | Question: ${(gameState.questionIndex%totalQuestionsPerLevel)+1} / ${totalQuestionsPerLevel}</div><div class="game-content"><div class="question">${qObj.question}</div><div class="answers" id="answersRow"></div></div></div>`;
+  const answersRow = document.getElementById('answersRow');
+  answers.forEach(ans=>{
+    const b=document.createElement('button'); b.className='answer-btn'; b.textContent=ans;
+    b.onclick=()=>{
+      if(b.disabled) return;
+      playClickSound();
+      Array.from(answersRow.children).forEach(ch=>ch.disabled=true);
+      if(ans===qObj.correct){ b.classList.add('correct'); playCorrectSound(); gameState.score++; }
+      else{ b.classList.add('incorrect'); playWrongSound(); Array.from(answersRow.children).forEach(ch=>{ if(ch.textContent===qObj.correct) ch.classList.add('correct');}); }
+      setTimeout(()=>{ gameState.questionIndex++; renderGame(); }, 900);
     };
+    answersRow.appendChild(b);
   });
+}
 
+/* initial UI */
+renderGameTabs(); renderGame();
+
+/* nav smooth scroll & highlight */
+document.querySelectorAll('nav a.nav-link').forEach(link=>{
+  link.addEventListener('click', e=>{
+    e.preventDefault();
+    const id = link.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    document.querySelectorAll('nav a.nav-link').forEach(a=>a.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+/* keyboard nav for tabs */
+gameTabs.addEventListener('keydown',(e)=>{
+  const buttons = Array.from(gameTabs.children);
+  if(e.key==='ArrowRight' || e.key==='ArrowLeft'){
+    e.preventDefault();
+    let idx = buttons.findIndex(b=>b.classList.contains('active'));
+    if(idx===-1) idx=0;
+    idx = (e.key==='ArrowRight') ? (idx+1)%buttons.length : (idx-1+buttons.length)%buttons.length;
+    buttons[idx].click();
+  }
+});
+
+/* Welcome message & initial voice hint */
+window.addEventListener('load',()=>{
+  appendMessage("Hello — I'm Honest. Tap 'Chat with Honest' to ask me or pick any game to start learning!",'ai');
+  setTimeout(()=>speakHonest("Hello, I'm Honest. Welcome to HB Graphics learning hub."),600);
+});
+
+/* enable music button */
+const musicToggle = document.getElementById('musicToggle');
+musicToggle.addEventListener('click', ()=>{
+  if(!musicPlaying){
+    // need user gesture to start audio
+    startAmbientMusic();
+    musicToggle.textContent='Disable Music';
+    musicToggle.style.background='#a11a20';
+  } else {
+    stopAmbientMusic();
+    musicToggle.textContent='Enable Music';
+    musicToggle.style.background='#00275e';
+  }
+});
+
+/* play short welcome tone on user gesture */
+document.addEventListener('click', ()=>{ try{ if(audioCtx && audioCtx.state==='suspended') audioCtx.resume(); }catch(e){} }, {once:true});
 </script>
-
 </body>
 </html>
