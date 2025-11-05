@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HB Graphics Skill Games</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HB Graphics Skill Games & Services</title>
 <style>
   body {
     font-family: 'Poppins', sans-serif;
@@ -53,6 +53,8 @@
 
   main {
     padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .question-box {
@@ -60,7 +62,6 @@
     border-radius: 12px;
     padding: 1rem;
     margin: 1rem auto;
-    max-width: 400px;
   }
 
   .answers button {
@@ -106,18 +107,35 @@
     100% { transform: translateX(0); }
   }
 
-  footer {
-    margin-top: 2rem;
-    font-size: 0.9rem;
+  .services {
     background: rgba(0,0,0,0.3);
+    border-radius: 12px;
     padding: 1rem;
+    margin: 2rem auto;
+    max-width: 600px;
+  }
+
+  .services h2 {
+    margin-top: 0;
+  }
+
+  .services ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    font-weight: 600;
+  }
+
+  .services ul li {
+    margin: 0.4rem 0;
   }
 
   .ai-section {
     background: rgba(255,255,255,0.15);
     border-radius: 12px;
     padding: 1rem;
-    margin: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
   }
 
   .ai-input {
@@ -143,6 +161,18 @@
     cursor: pointer;
   }
 
+  footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+  }
+
+  footer a {
+    color: #ff9800;
+    text-decoration: none;
+  }
+
   @media (max-width: 480px) {
     h1 { font-size: 1.3rem; }
     nav button { font-size: 0.8rem; padding: 0.5rem; }
@@ -162,6 +192,18 @@
     <div class="answers" id="answers"></div>
   </div>
 
+  <div class="services">
+    <h2>🎨 Our Services</h2>
+    <ul>
+      <li>✔ Graphic Design</li>
+      <li>✔ Embroidery</li>
+      <li>✔ Digital Marketing</li>
+      <li>✔ Facebook Page Management</li>
+      <li>✔ Vehicle Import & Registration Services</li>
+      <li>✔ T-Shirt Printing</li>
+    </ul>
+  </div>
+
   <div class="ai-section">
     <h2>🤖 Honest AI</h2>
     <p id="aiOutput">Ask me anything!</p>
@@ -176,111 +218,112 @@
   <p>💬 Appreciate HB Graphics for this free learning platform!</p>
   <p>
     📧 Email: <a href="mailto:hb4life40@gmail.com">hb4life40@gmail.com</a><br/>
-    💬 WhatsApp: <a href="https://wa.me/260776942402" target="_blank">Chat on WhatsApp</a><br/>
+    💬 WhatsApp: <a href="https://wa.me/260776942402" target="_blank" rel="noopener">Chat on WhatsApp</a><br/>
     💸 Mobile Money: <strong>0776 942 402 (Honest Bulilu)</strong>
   </p>
 </footer>
 
-<!-- load question data -->
 <script src="questions.js"></script>
 
 <script>
-/*******************
-  SOUND EFFECTS
-*******************/
-const correctSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c2c858e39.mp3?filename=correct-answer-2-37964.mp3");
-const wrongSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_b06a9f4a45.mp3?filename=wrong-buzzer-6268.mp3");
+  // Sound effects for answers
+  const correctSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c2c858e39.mp3?filename=correct-answer-2-37964.mp3");
+  const wrongSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_b06a9f4a45.mp3?filename=wrong-buzzer-6268.mp3");
 
-/*******************
-  QUIZ SYSTEM
-*******************/
-const allGames = window.ALL_QUESTIONS;
-const gameNav = document.getElementById("gameNav");
-const quizBox = document.getElementById("quizBox");
-const questionElem = document.getElementById("question");
-const answersElem = document.getElementById("answers");
+  const allGames = window.ALL_QUESTIONS;
+  const gameNav = document.getElementById("gameNav");
+  const quizBox = document.getElementById("quizBox");
+  const questionElem = document.getElementById("question");
+  const answersElem = document.getElementById("answers");
 
-let currentCategory = Object.keys(allGames)[0];
-let questionIndex = 0;
+  let currentCategory = Object.keys(allGames)[0];
+  let questionIndex = 0;
 
-Object.keys(allGames).forEach(category => {
-  const btn = document.createElement("button");
-  btn.textContent = category;
-  btn.onclick = () => startGame(category);
-  gameNav.appendChild(btn);
-});
-
-function startGame(category) {
-  currentCategory = category;
-  questionIndex = 0;
-  showQuestion();
-}
-
-function showQuestion() {
-  const questions = allGames[currentCategory];
-  if (!questions) return;
-
-  const q = questions[questionIndex % questions.length];
-  questionElem.textContent = q.question;
-  answersElem.innerHTML = "";
-
-  q.answers.sort(() => Math.random() - 0.5).forEach(answer => {
+  Object.keys(allGames).forEach(category => {
     const btn = document.createElement("button");
-    btn.textContent = answer;
-    btn.onclick = () => checkAnswer(btn, answer === q.correct);
-    answersElem.appendChild(btn);
+    btn.textContent = category;
+    btn.onclick = () => startGame(category);
+    gameNav.appendChild(btn);
   });
-}
 
-function checkAnswer(button, correct) {
-  if (correct) {
-    button.classList.add("correct");
-    correctSound.play();
-    setTimeout(() => {
-      questionIndex++;
-      showQuestion();
-    }, 800);
-  } else {
-    button.classList.add("wrong");
-    wrongSound.play();
+  function startGame(category) {
+    currentCategory = category;
+    questionIndex = 0;
+    showQuestion();
   }
-}
 
-/*******************
-  HONEST AI (Creative)
-*******************/
-const aiOutput = document.getElementById("aiOutput");
-const synth = window.speechSynthesis;
+  function showQuestion() {
+    const questions = allGames[currentCategory];
+    if (!questions) {
+      questionElem.textContent = "No questions available.";
+      answersElem.innerHTML = "";
+      return;
+    }
 
-function askAI() {
-  const input = document.getElementById("aiInput").value.trim();
-  if (!input) return;
+    const q = questions[questionIndex % questions.length];
+    questionElem.textContent = q.question;
+    answersElem.innerHTML = "";
 
-  // Simple local logic for demonstration
-  const responses = [
-    "That's a great question! Let me think...",
-    "Hmm, interesting. I’d say focus on creativity and consistency.",
-    "You're on the right path! Keep learning and practicing.",
-    "That depends on your goals — what are you trying to achieve?",
-    "Good one! I’d recommend you experiment with design tools."
-  ];
-  const response = responses[Math.floor(Math.random() * responses.length)];
-  aiOutput.textContent = "Honest AI: " + response;
-  speak(response);
-}
+    // Shuffle answers
+    q.answers.sort(() => Math.random() - 0.5).forEach(answer => {
+      const btn = document.createElement("button");
+      btn.textContent = answer;
+      btn.onclick = () => checkAnswer(btn, answer === q.correct);
+      answersElem.appendChild(btn);
+    });
+  }
 
-function speak(text) {
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.pitch = 1;
-  utter.rate = 1;
-  utter.volume = 1;
-  utter.voice = speechSynthesis.getVoices().find(v => v.lang.startsWith("en"));
-  synth.cancel();
-  synth.speak(utter);
-}
+  function checkAnswer(button, correct) {
+    if (correct) {
+      button.classList.add("correct");
+      correctSound.play();
+      setTimeout(() => {
+        questionIndex++;
+        showQuestion();
+      }, 800);
+    } else {
+      button.classList.add("wrong");
+      wrongSound.play();
+    }
+  }
 
-// Start first game on load
-startGame(currentCategory);
+  // Honest AI logic with voice
+  const aiOutput = document.getElementById("aiOutput");
+  const synth = window.speechSynthesis;
+
+  function askAI() {
+    const input = document.getElementById("aiInput").value.trim();
+    if (!input) return;
+
+    // Simple canned responses, random for demo
+    const responses = [
+      "That's a great question! Let me think...",
+      "Hmm, interesting. I’d say focus on creativity and consistency.",
+      "You're on the right path! Keep learning and practicing.",
+      "That depends on your goals — what are you trying to achieve?",
+      "Good one! I’d recommend you experiment with design tools."
+    ];
+    const response = responses[Math.floor(Math.random() * responses.length)];
+    aiOutput.textContent = "Honest AI: " + response;
+    speak(response);
+  }
+
+  function speak(text) {
+    if (!synth) return;
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.pitch = 1;
+    utter.rate = 1;
+    utter.volume = 1;
+    const voice = synth.getVoices().find(v => v.lang.startsWith("en"));
+    if (voice) utter.voice = voice;
+
+    synth.cancel();
+    synth.speak(utter);
+  }
+
+  // Start first game on load
+  startGame(currentCategory);
 </script>
 </body>
 </html>
