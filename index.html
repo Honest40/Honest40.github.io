@@ -1,15 +1,141 @@
-const games = [
-  {
-    id: "game1",
-    title: "Your Game Name",
-    questions: [
-      {
-        question: "What is 2 + 2?",
-        answers: ["3", "4", "5", "6"],
-        correctIndex: 1
-      },
-      // add up to 100+ question objects here
-    ],
-  },
-  // more games...
-];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HB Graphics Learning & AI Assistant</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; color: #222; }
+  h1, h2 { color: #d2232a; }
+  .service-card { background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.1);}
+  button.answer-btn { background: orange; border: none; padding: 10px 15px; margin: 5px; border-radius: 20px; cursor: pointer; }
+  button.answer-btn:hover { background: darkorange; color: white; }
+  #chatMessages { border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: auto; background: white; margin-bottom: 10px; }
+  #chatInput { width: 80%; padding: 10px; border-radius: 20px; border: 1px solid #ccc; }
+  #chatSendBtn { padding: 10px 20px; background: #d2232a; color: white; border: none; border-radius: 20px; cursor: pointer; }
+  .message { margin: 5px 0; padding: 8px 12px; border-radius: 15px; max-width: 70%; }
+  .ai { background: #eee; text-align: left; }
+  .user { background: #d2232a; color: white; text-align: right; margin-left: auto;}
+</style>
+</head>
+<body>
+
+<h1>HB Graphics Learning & AI Assistant</h1>
+
+<section id="services">
+  <h2>Services</h2>
+  <div id="servicesContainer"></div>
+</section>
+
+<section id="chat">
+  <h2>Chat with Honest (AI)</h2>
+  <div id="chatMessages"></div>
+  <input type="text" id="chatInput" placeholder="Type your message here" />
+  <button id="chatSendBtn">Send</button>
+</section>
+
+<section id="game">
+  <h2>Sample Quiz Game</h2>
+  <div id="gameQuestion"></div>
+  <div id="gameAnswers"></div>
+</section>
+
+<script>
+  // Simple services
+  const services = [
+    {name: "Graphic Design", desc: "Logo design, flyers, branding."},
+    {name: "Printing", desc: "T-shirts, mugs, posters."},
+  ];
+  const servicesContainer = document.getElementById('servicesContainer');
+  services.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'service-card';
+    div.innerHTML = `<h3>${s.name}</h3><p>${s.desc}</p>`;
+    servicesContainer.appendChild(div);
+  });
+
+  // Chat functionality
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+  const chatSendBtn = document.getElementById('chatSendBtn');
+
+  function appendMessage(text, sender) {
+    const div = document.createElement('div');
+    div.classList.add('message', sender);
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function speak(text) {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+
+  function getAIResponse(msg) {
+    msg = msg.toLowerCase();
+    if(msg.includes('hello') || msg.includes('hi')) {
+      return "Hi! How can I assist you with graphic design today?";
+    }
+    if(msg.includes('price')) {
+      return "Please tell me which service you want pricing for.";
+    }
+    return "Sorry, I didn't understand that. Please ask me about our services.";
+  }
+
+  function sendMessage() {
+    const msg = chatInput.value.trim();
+    if(!msg) return;
+    appendMessage(msg, 'user');
+    chatInput.value = '';
+
+    const response = getAIResponse(msg);
+    appendMessage('...', 'ai');
+    setTimeout(() => {
+      chatMessages.querySelector('.ai:last-child').textContent = response;
+      speak(response);
+    }, 700);
+  }
+
+  chatSendBtn.onclick = sendMessage;
+  chatInput.addEventListener('keydown', e => {
+    if(e.key === 'Enter') sendMessage();
+  });
+
+  // Simple quiz game
+  const questions = [
+    {q: "What does RGB stand for?", answers: ["Red Green Blue", "Random Great Brand", "Really Good Business"], correct: "Red Green Blue"},
+    {q: "Which software is used for vector graphics?", answers: ["Photoshop", "Adobe Illustrator", "MS Paint"], correct: "Adobe Illustrator"},
+  ];
+  let currentQuestion = 0;
+  const gameQuestion = document.getElementById('gameQuestion');
+  const gameAnswers = document.getElementById('gameAnswers');
+
+  function showQuestion() {
+    const question = questions[currentQuestion];
+    gameQuestion.textContent = `Q${currentQuestion + 1}: ${question.q}`;
+    gameAnswers.innerHTML = '';
+    question.answers.forEach(ans => {
+      const btn = document.createElement('button');
+      btn.className = 'answer-btn';
+      btn.textContent = ans;
+      btn.onclick = () => {
+        if(ans === question.correct) {
+          alert("Correct!");
+        } else {
+          alert("Wrong. The correct answer is: " + question.correct);
+        }
+        currentQuestion = (currentQuestion + 1) % questions.length;
+        showQuestion();
+      };
+      gameAnswers.appendChild(btn);
+    });
+  }
+  showQuestion();
+
+</script>
+
+</body>
+</html>
