@@ -1,50 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Daily Design Challenge – HB Graphics Zambia</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HB Graphics Zambia | Design Order</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align:center; margin:0; padding:30px; background:#f0f0f0; }
-    #challenge { font-size:24px; margin:20px; }
-    #timer { font-size:20px; color:#555; }
-    #startBtn { padding:15px 30px; font-size:20px; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+    main {
+      max-width: 480px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+      font-size: 15px;
+    }
+    button {
+      background: #0ea5e9;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0284c7;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #555;
+      font-size: 14px;
+    }
+    .payment {
+      background: #f0f9ff;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #0369a1;
+    }
   </style>
 </head>
 <body>
-  <h1>Daily Design Challenge</h1>
-  <div id="challenge">Click “Start” for today’s challenge!</div>
-  <div id="timer"></div>
-  <button id="startBtn">Start</button>
+
+  <header>
+    <h1>HB Graphics Zambia</h1>
+    <p>Order Your Design or Branding Service</p>
+  </header>
+
+  <main>
+    <form id="orderForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your full name" required />
+
+      <label for="service">Select Service</label>
+      <select id="service" required>
+        <option value="">-- Choose a service --</option>
+        <option>Logo Design</option>
+        <option>Social Media Post Design</option>
+        <option>T-shirt Printing (Round Neck)</option>
+        <option>T-shirt Printing (Golf)</option>
+        <option>Vehicle Branding</option>
+        <option>Shop Branding</option>
+        <option>Office Branding</option>
+        <option>Brochure/Flyer Design</option>
+      </select>
+
+      <label for="details">Project Details</label>
+      <textarea id="details" rows="4" placeholder="Describe what you want..."></textarea>
+
+      <label for="budget">Your Budget (ZMW)</label>
+      <input type="number" id="budget" placeholder="e.g. 200" />
+
+      <label for="deadline">Deadline</label>
+      <input type="date" id="deadline" />
+
+      <div class="payment">
+        <b>💳 Payment Options:</b><br>
+        MTN MoMo: <b>+260 776942402</b><br>
+        Airtel Money: <b>+260 776942402</b><br>
+        <small>Pay before or after confirming with us on WhatsApp.</small>
+      </div>
+
+      <button type="button" onclick="sendToWhatsApp()">Send Order on WhatsApp</button>
+    </form>
+  </main>
+
+  <footer>
+    © 2025 HB Graphics Zambia — All Rights Reserved
+  </footer>
 
   <script>
-    const challenges = [
-      "Design a simple logo for a coffee shop in 10 minutes.",
-      "Create a social-media post for a vehicle wrap sale in 8 minutes.",
-      "Design a t-shirt graphic that says “Zambia Creative” in 12 minutes."
-    ];
-    let selected = "";
-    let seconds = 0;
-    document.getElementById('startBtn').addEventListener('click', ()=>{
-      selected = challenges[Math.floor(Math.random()*challenges.length)];
-      seconds = 10 * 60; // 10 minutes
-      document.getElementById('challenge').textContent = selected;
-      document.getElementById('timer').textContent = formatTime(seconds);
-      const interval = setInterval(()=>{
-        if(seconds <= 0) {
-          clearInterval(interval);
-          alert("Time's up! Take a screenshot of your work and share.");
-          document.getElementById('timer').textContent = "Done!";
-        } else {
-          seconds--;
-          document.getElementById('timer').textContent = formatTime(seconds);
-        }
-      },1000);
-    });
-    function formatTime(s) {
-      const m = Math.floor(s/60), r = s%60;
-      return m + ":" + (r<10?"0":"") + r;
+    function sendToWhatsApp() {
+      const name = document.getElementById("name").value.trim();
+      const service = document.getElementById("service").value;
+      const details = document.getElementById("details").value.trim();
+      const budget = document.getElementById("budget").value.trim();
+      const deadline = document.getElementById("deadline").value;
+
+      if (!name || !service) {
+        alert("Please fill in your name and select a service.");
+        return;
+      }
+
+      const message = 
+        `Hello HB Graphics Zambia! 👋%0A%0A` +
+        `*New Design Order*%0A` +
+        `Name: ${name}%0A` +
+        `Service: ${service}%0A` +
+        `Details: ${details || 'N/A'}%0A` +
+        `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}%0A` +
+        `Deadline: ${deadline || 'Not specified'}%0A%0A` +
+        `Payment Option: MTN/Airtel Money%0A` +
+        `📞 Contact me back on WhatsApp.`
+
+      const whatsappNumber = "260776942402"; // Your number without +
+      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(url, "_blank");
     }
   </script>
+
 </body>
 </html>
