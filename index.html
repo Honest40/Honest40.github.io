@@ -1,3 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HB Graphics Zambia | Design & Branding Orders</title>
+
+  <!-- Google AdSense script: place once here -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5479895242652506"
+     crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      background: #ff0000;
+      padding: 20px;
+    }
+    header img {
+      width: 300px;
+      border-radius: 10px;
+    }
+    header h1 {
+      color: #fff;
+      margin-top: 10px;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+    main {
+      max-width: 550px;
+      margin: 20px auto;
+      background: #fff;
+      border: 2px solid #ff0000;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      padding: 25px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    input[type="file"] {
+      border: none;
+    }
+    button {
+      background: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 18px;
+      width: 100%;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #d60000;
+    }
+    .payment {
+      background: #fff0f0;
+      border-left: 4px solid #ff0000;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      background: #ff0000;
+      color: #fff;
+      margin-top: 30px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+  </style>
+</head>
 <body>
 
   <header>
@@ -5,10 +97,6 @@
     <h1>HB Graphics Zambia</h1>
     <p style="color:#fff;">Graphic Design | Branding | Printing | Laser Engraving | Web & App Solutions</p>
   </header>
-
-  <!-- Google AdSense Script - add once -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5479895242652506"
-     crossorigin="anonymous"></script>
 
   <!-- Banner Ad below header -->
   <div style="text-align:center; margin: 15px 0;">
@@ -19,12 +107,67 @@
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
     <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>
 
   <main>
-    <!-- Your existing form code -->
+    <form id="orderForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your full name" required />
+
+      <label for="service">Select Service</label>
+      <select id="service" required>
+        <option value="">-- Choose a service --</option>
+        <option>Logo Design</option>
+        <option>Business Card Design</option>
+        <option>Flyer Design & Printing</option>
+        <option>Brochure Design</option>
+        <option>Poster/Banner Design</option>
+        <option>PVC Banner Printing</option>
+        <option>Vinyl Sticker Printing</option>
+        <option>X Banner Stand</option>
+        <option>Pull-up Banner</option>
+        <option>Backdrop Banner</option>
+        <option>Telescopic Flag</option>
+        <option>Paper Flyer/Banner Printing</option>
+        <option>T-shirt Printing (Round Neck)</option>
+        <option>T-shirt Printing (Golf)</option>
+        <option>T-shirt Printing (Corporate)</option>
+        <option>Hoodie Printing</option>
+        <option>Mug/Cup Printing</option>
+        <option>Vehicle Branding</option>
+        <option>Shop Branding</option>
+        <option>Office Branding</option>
+        <option>Laser Engraving</option>
+        <option>Web Design</option>
+        <option>Web Development</option>
+        <option>Portfolio Website Design</option>
+        <option>Application Design</option>
+        <option>Application Development</option>
+        <option>Android Application Development</option>
+      </select>
+
+      <label for="details">Project Details</label>
+      <textarea id="details" rows="4" placeholder="Describe what you want..."></textarea>
+
+      <label for="budget">Budget (ZMW)</label>
+      <input type="number" id="budget" placeholder="e.g. 500" />
+
+      <label for="deadline">Deadline</label>
+      <input type="date" id="deadline" />
+
+      <label for="file">Upload Logo / Picture / Sketch</label>
+      <input type="file" id="file" accept="image/*" />
+
+      <div class="payment">
+        <b>💳 Payment Method:</b><br>
+        Airtel Money: <b>+260 776942402</b> (Account Name: <b>Honest Bulilu</b>)<br>
+        <small>Confirm your order via WhatsApp or Email before payment.</small>
+      </div>
+
+      <button type="button" onclick="sendOrder()">Send Order (WhatsApp & Email)</button>
+    </form>
   </main>
 
   <!-- Optional Banner Ad above footer -->
@@ -36,7 +179,7 @@
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
     <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>
 
@@ -44,5 +187,57 @@
     © 2025 HB Graphics Zambia — All Rights Reserved
   </footer>
 
-  <!-- Your existing script for the form -->
+  <script>
+    function sendOrder() {
+      const name = document.getElementById("name").value.trim();
+      const service = document.getElementById("service").value;
+      const details = document.getElementById("details").value.trim();
+      const budget = document.getElementById("budget").value.trim();
+      const deadline = document.getElementById("deadline").value;
+      const fileInput = document.getElementById("file");
+
+      if (!name || !service) {
+        alert("Please enter your name and select a service.");
+        return;
+      }
+
+      let message =
+        `Hello HB Graphics Zambia 👋%0A%0A` +
+        `*New Order Request*%0A` +
+        `Name: ${name}%0A` +
+        `Service: ${service}%0A` +
+        `Details: ${details || 'N/A'}%0A` +
+        `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}%0A` +
+        `Deadline: ${deadline || 'Not specified'}%0A%0A` +
+        `Payment: Airtel Money (+260 776942402, Account Name: Honest Bulilu)%0A` +
+        `Please confirm my order.%0A`;
+
+      // WhatsApp
+      const whatsappNumber = "260776942402";
+      const waURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+      window.open(waURL, "_blank");
+
+      // Email
+      const email = "hbforlife40@gmail.com";
+      const subject = encodeURIComponent("New Order from HB Graphics Zambia Website");
+      const body = encodeURIComponent(
+        `Hello HB Graphics Zambia,\n\n` +
+        `You have a new order request:\n\n` +
+        `Name: ${name}\n` +
+        `Service: ${service}\n` +
+        `Details: ${details || 'N/A'}\n` +
+        `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}\n` +
+        `Deadline: ${deadline || 'Not specified'}\n\n` +
+        `Payment: Airtel Money (+260 776942402, Account Name: Honest Bulilu)\n\n` +
+        `Please confirm the order.`
+      );
+      const mailtoURL = `mailto:${email}?subject=${subject}&body=${body}`;
+      window.open(mailtoURL, "_blank");
+
+      if (fileInput.files.length > 0) {
+        alert("Note: WhatsApp and Email may not auto-attach files — please attach manually if needed.");
+      }
+    }
+  </script>
 </body>
+</html>
