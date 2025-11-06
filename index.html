@@ -1,243 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HB Graphics Zambia | Design & Branding Orders</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Couples Real Talk & Fun Game 💕</title>
 
-  <!-- Google AdSense script: place once here -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5479895242652506"
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5479895242652506"
      crossorigin="anonymous"></script>
 
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: #fff;
-      color: #111;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      text-align: center;
-      background: #ff0000;
-      padding: 20px;
-    }
-    header img {
-      width: 300px;
-      border-radius: 10px;
-    }
-    header h1 {
-      color: #fff;
-      margin-top: 10px;
-      font-size: 24px;
-      letter-spacing: 1px;
-    }
-    main {
-      max-width: 550px;
-      margin: 20px auto;
-      background: #fff;
-      border: 2px solid #ff0000;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-      padding: 25px;
-    }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: 600;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-    input[type="file"] {
-      border: none;
-    }
-    button {
-      background: #ff0000;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 14px;
-      font-size: 18px;
-      width: 100%;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #d60000;
-    }
-    .payment {
-      background: #fff0f0;
-      border-left: 4px solid #ff0000;
-      padding: 10px;
-      margin-top: 20px;
-      border-radius: 8px;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-      background: #ff0000;
-      color: #fff;
-      margin-top: 30px;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-    }
-  </style>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff8f0;
+    margin: 0; padding: 20px;
+    display: flex; justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+  }
+  #container {
+    max-width: 700px;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  h1 {
+    color: #d6336c;
+    margin-bottom: 10px;
+  }
+  .turn-indicator {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #6a0dad;
+  }
+  .question, .fun-question {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4b2e83;
+    margin-bottom: 25px;
+    min-height: 80px;
+    padding: 10px 15px;
+    background: #f9e6f7;
+    border-radius: 10px;
+    user-select: none;
+  }
+  #answer-input, #fun-answer {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #d6336c;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+  }
+  #submit-btn, #fun-submit-btn {
+    background-color: #d6336c;
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  #submit-btn:hover, #fun-submit-btn:hover {
+    background-color: #a31a4d;
+  }
+  #responses {
+    margin-top: 30px;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+  .response {
+    margin-bottom: 18px;
+    padding: 10px 15px;
+    background: #f0d9f7;
+    border-radius: 10px;
+    color: #3c0a53;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  #appreciation {
+    margin-top: 35px;
+    font-size: 16px;
+    color: #555;
+    font-weight: 600;
+    border-top: 2px solid #d6336c;
+    padding-top: 20px;
+  }
+  #phone-number {
+    color: #d6336c;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: all;
+    text-decoration: underline;
+  }
+  #fun-game-btn, #real-talk-btn {
+    margin-top: 20px;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  #fun-game-btn:hover, #real-talk-btn:hover {
+    background-color: #4a076f;
+  }
+  footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+  }
+
+  /* Responsive ad container */
+  #ad-container {
+    max-width: 700px;
+    margin: 25px auto 0;
+    width: 100%;
+  }
+</style>
 </head>
 <body>
+  <div id="container">
+    <h1 id="title">Couples Real Talk 💕</h1>
+    <div class="turn-indicator" id="turn-indicator">Husband asks: Wife answers</div>
+    <div class="question" id="question"></div>
+    <textarea id="answer-input" placeholder="Type your honest answer here..."></textarea>
+    <button id="submit-btn">Submit Answer</button>
 
-  <header>
-    <img src="hb logo.jpg.jpeg" alt="HB Graphics Logo" />
-    <h1>HB Graphics Zambia</h1>
-    <p style="color:#fff;">Graphic Design | Branding | Printing | Laser Engraving | Web & App Solutions</p>
-  </header>
+    <div id="responses"></div>
 
-  <!-- Banner Ad below header -->
-  <div style="text-align:center; margin: 15px 0;">
+    <button id="fun-game-btn">Switch to Fun Couples Game 🎲</button>
+    <button id="real-talk-btn" style="display:none;">Switch to Real Talk Game 💬</button>
+
+    <div id="appreciation">
+      To support the developer, send Airtel Money to:<br/>
+      <span id="phone-number" title="Click to copy">0776942402</span> (Honest Bulilu)<br/>
+      <small id="copy-feedback" style="color:green; display:none;">Number copied to clipboard!</small>
+    </div>
+
+    <footer>Open hearts, open minds. Strengthen your love. ❤️</footer>
+  </div>
+
+  <!-- AdSense responsive ad -->
+  <div id="ad-container">
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-5479895242652506"
          data-ad-slot="4301748254"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
   </div>
 
-  <main>
-    <form id="orderForm">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="Your full name" required />
+<script>
+  // Real Talk Questions (110+ each side) - trimmed here for brevity
+  const realTalkQuestions = {
+    husband: [
+      "What is one thing I do that makes you feel most loved?",
+      "What’s a dream or goal you’ve never told me about?",
+      "How do you prefer to be comforted when you’re upset?",
+      "What’s a way I can support you better in daily life?",
+      "What’s a memory of us that always makes you smile?",
+      "Is there something you’ve always wanted us to try together?",
+      "How do you like to celebrate special occasions?",
+      "What’s something small I do that really annoys you?",
+      "What does a perfect weekend together look like for you?",
+      "What’s one thing you admire about our relationship?",
+      "What’s one habit I have that you’d like me to change?",
+      "How do you feel we handle disagreements?",
+      "What’s something new you want to learn with me?",
+      "How do you feel about how we spend quality time?",
+      "What’s a way we could better show appreciation to each other?",
+      "What does emotional intimacy mean to you?",
+      "How do you feel about our communication style?",
+      "What’s a fear you have about our relationship?",
+      "What’s something you want us to do more often?",
+      "How do you express love when words aren’t enough?",
+    ],
+    wife: [
+      "What is one thing I do that makes you feel respected?",
+      "What’s a childhood dream that still inspires you?",
+      "How do you show love when you’re not good with words?",
+      "What’s your favorite way we spend time together?",
+      "What’s something you wish I understood better about you?",
+      "How do you handle stress, and how can I help?",
+      "What’s a habit you want us to build as a couple?",
+      "What do you appreciate most about me?",
+      "What’s something you want to improve in our communication?",
+      "How do you envision our future in 5 years?",
+      "What’s one thing about me that surprised you when we got married?",
+      "How do you feel we balance work and personal life?",
+      "What’s a new hobby you’d like us to try together?",
+      "How do you like to be comforted when you’re sad?",
+      "What’s a quality you most admire in me?",
+      "How do you think we can better resolve conflicts?",
+      "What’s a dream trip you want us to take?",
+      "What’s your favorite way I show affection?",
+      "How do you feel about our support for each other's goals?",
+      "What’s one thing you want to tell me but haven’t yet?",
+    ]
+  };
 
-      <label for="service">Select Service</label>
-      <select id="service" required>
-        <option value="">-- Choose a service --</option>
-        <option>Logo Design</option>
-        <option>Business Card Design</option>
-        <option>Flyer Design & Printing</option>
-        <option>Brochure Design</option>
-        <option>Poster/Banner Design</option>
-        <option>PVC Banner Printing</option>
-        <option>Vinyl Sticker Printing</option>
-        <option>X Banner Stand</option>
-        <option>Pull-up Banner</option>
-        <option>Backdrop Banner</option>
-        <option>Telescopic Flag</option>
-        <option>Paper Flyer/Banner Printing</option>
-        <option>T-shirt Printing (Round Neck)</option>
-        <option>T-shirt Printing (Golf)</option>
-        <option>T-shirt Printing (Corporate)</option>
-        <option>Hoodie Printing</option>
-        <option>Mug/Cup Printing</option>
-        <option>Vehicle Branding</option>
-        <option>Shop Branding</option>
-        <option>Office Branding</option>
-        <option>Laser Engraving</option>
-        <option>Web Design</option>
-        <option>Web Development</option>
-        <option>Portfolio Website Design</option>
-        <option>Application Design</option>
-        <option>Application Development</option>
-        <option>Android Application Development</option>
-      </select>
+  // Fun Couples "Would You Rather" Questions
+  const funGameQuestions = [
+    { q: "Would you rather cook a romantic dinner together or watch a movie cuddle?", options: ["Cook dinner", "Watch a movie"] },
+    { q: "Would you rather have a date night in or go out dancing?", options: ["Date night in", "Go out dancing"] },
+    { q: "Would you rather take a trip to the beach or the mountains?", options: ["Beach", "Mountains"] },
+    { q: "Would you rather surprise your partner with a gift or a love letter?", options: ["Gift", "Love letter"] },
+    { q: "Would you rather dance in the rain or stargaze all night?", options: ["Dance in rain", "Stargaze"] },
+    { q: "Would you rather go on a road trip or fly to a new country?", options: ["Road trip", "Fly"] },
+    { q: "Would you rather have breakfast in bed or dinner by candlelight?", options: ["Breakfast in bed", "Dinner by candlelight"] },
+    { q: "Would you rather share a hobby or have your own separate hobbies?", options: ["Share hobby", "Separate hobbies"] },
+    { q: "Would you rather plan a surprise party or get surprised?", options: ["Plan party", "Get surprised"] },
+    { q: "Would you rather write a song for your partner or paint a portrait?", options: ["Write song", "Paint portrait"] }
+  ];
 
-      <label for="details">Project Details</label>
-      <textarea id="details" rows="4" placeholder="Describe what you want..."></textarea>
+  let husbandTurn = true;
+  let husbandQuestionIndex = 0;
+  let wifeQuestionIndex = 0;
 
-      <label for="budget">Budget (ZMW)</label>
-      <input type="number" id="budget" placeholder="e.g. 500" />
+  let funGameIndex = 0;
 
-      <label for="deadline">Deadline</label>
-      <input type="date" id="deadline" />
+  // Elements
+  const title = document.getElementById('title');
+  const turnIndicator = document.getElementById('turn-indicator');
+  const questionElem = document.getElementById('question');
+  const answerInput = document.getElementById('answer-input');
+  const submitBtn = document.getElementById('submit-btn');
+  const responsesDiv = document.getElementById('responses');
+  const funGameBtn = document.getElementById('fun-game-btn');
+  const realTalkBtn = document.getElementById('real-talk-btn');
+  const phoneNumberElem = document.getElementById('phone-number');
+  const copyFeedback = document.getElementById('copy-feedback');
 
-      <label for="file">Upload Logo / Picture / Sketch</label>
-      <input type="file" id="file" accept="image/*" />
+  // State: 'realTalk' or 'funGame'
+  let currentGame = 'realTalk';
 
-      <div class="payment">
-        <b>💳 Payment Method:</b><br>
-        Airtel Money: <b>+260 776942402</b> (Account Name: <b>Honest Bulilu</b>)<br>
-        <small>Confirm your order via WhatsApp or Email before payment.</small>
-      </div>
+  function updateRealTalkTurn() {
+    if (husbandTurn) {
+      turnIndicator.textContent = "Husband asks: Wife answers";
+      questionElem.textContent = realTalkQuestions.husband[husbandQuestionIndex];
+      answerInput.placeholder = "Wife, type your honest answer here...";
+    } else {
+      turnIndicator.textContent = "Wife asks: Husband answers";
+      questionElem.textContent = realTalkQuestions.wife[wifeQuestionIndex];
+      answerInput.placeholder = "Husband, type your honest answer here...";
+    }
+    answerInput.value = '';
+    answerInput.style.display = 'block';
+    submitBtn.style.display = 'inline-block';
+  }
 
-      <button type="button" onclick="sendOrder()">Send Order (WhatsApp & Email)</button>
-    </form>
-  </main>
+  function addResponse(whoAsked, question, answer) {
+    const div = document.createElement('div');
+    div.className = 'response';
+    div.innerHTML = `<strong>${whoAsked} asked:</strong> <em>"${question}"</em><br/><strong>Answer:</strong> ${answer}`;
+    responsesDiv.appendChild(div);
+    responsesDiv.scrollTop = responsesDiv.scrollHeight;
+  }
 
-  <!-- Optional Banner Ad above footer -->
-  <div style="text-align:center; margin: 20px 0;">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-5479895242652506"
-         data-ad-slot="4301748254"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
+  function updateFunGameQuestion() {
+    const current = funGameQuestions[funGameIndex];
+    turnIndicator.textContent = "Fun Game: Choose your preference!";
+    questionElem.innerHTML = `<strong>${current.q}</strong>`;
+    answerInput.style.display = 'none';
+    submitBtn.style.display = 'none';
 
-  <footer>
-    © 2025 HB Graphics Zambia — All Rights Reserved
-  </footer>
+    // Clear previous options if any
+    const oldOptions = document.getElementById('fun-options');
+    if (oldOptions) oldOptions.remove();
 
-  <script>
-    function sendOrder() {
-      const name = document.getElementById("name").value.trim();
-      const service = document.getElementById("service").value;
-      const details = document.getElementById("details").value.trim();
-      const budget = document.getElementById("budget").value.trim();
-      const deadline = document.getElementById("deadline").value;
-      const fileInput = document.getElementById("file");
+    // Create buttons for choices
+    const optionsDiv = document.createElement('div');
+    optionsDiv.id = 'fun-options';
+    optionsDiv.style.marginBottom = '20px';
 
-      if (!name || !service) {
-        alert("Please enter your name and select a service.");
-        return;
+    current.options.forEach(option => {
+      const btn = document.createElement('button');
+      btn.textContent = option;
+      btn.style.margin = '0 10px 10px 0';
+      btn.style.padding = '12px 25px';
+      btn.style.borderRadius = '10px';
+      btn.style.border = '2px solid #6a0dad';
+      btn.style.background = 'white';
+      btn.style.color = '#6a0dad';
+      btn.style.cursor = 'pointer';
+      btn.style.fontSize = '16px';
+      btn.addEventListener('click', () => {
+        addFunGameResponse(option);
+      });
+      btn.onmouseover = () => {
+        btn.style.background = '#6a0dad';
+        btn.style.color = 'white';
       }
+      btn.onmouseout = () => {
+        btn.style.background = 'white';
+        btn.style.color = '#6a0dad';
+      }
+      optionsDiv.appendChild(btn);
+    });
 
-      let message =
-        `Hello HB Graphics Zambia 👋%0A%0A` +
-        `*New Order Request*%0A` +
-        `Name: ${name}%0A` +
-        `Service: ${service}%0A` +
-        `Details: ${details || 'N/A'}%0A` +
-        `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}%0A` +
-        `Deadline: ${deadline || 'Not specified'}%0A%0A` +
-        `Payment: Airtel Money (+260 776942402, Account Name: Honest Bulilu)%0A` +
-        `Please confirm my order.%0A`;
+    questionElem.after(optionsDiv);
+  }
 
-      // WhatsApp
-      const whatsappNumber = "260776942402";
-      const waURL = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(waURL, "_blank");
+  function addFunGameResponse(choice) {
+    const div = document.createElement('div');
+    div.className = 'response';
+    div.innerHTML = `<strong>Fun Game choice:</strong> ${choice}`;
+    responsesDiv.appendChild(div);
+    responsesDiv.scrollTop = responsesDiv.scrollHeight;
 
-      // Email
-      const email = "hbforlife40@gmail.com";
-      const subject = encodeURIComponent("New Order from HB Graphics Zambia Website");
-      const body = encodeURIComponent(
-        `Hello HB Graphics Zambia,\n\n` +
-        `You have a new order request:\n\n` +
-        `Name: ${name}\n` +
-        `Service: ${service}\n` +
-        `Details: ${details || 'N/A'}\n` +
-        `Budget: ${budget ? 'ZMW ' + budget : 'Not specified'}\n` +
-        `Deadline: ${deadline || 'Not specified'}\n\n` +
-        `Payment: Airtel Money (+260 776942402, Account Name: Honest Bulilu)\n\n` +
-        `Please confirm the order.`
-      );
-      const mailtoURL = `mailto:${email}?subject=${subject}&body=${body}`;
-      window.open(mailtoURL, "_blank");
+    // Move to next question or loop
+    funGameIndex++;
+    if (funGameIndex >= funGameQuestions.length) funGameIndex = 0;
 
-      if (fileInput.files.length > 0) {
-        alert("Note: WhatsApp and Email may not auto-attach files — please attach manually if needed.");
+    updateFunGameQuestion();
+  }
+
+  // Real Talk submit handler
+  submitBtn.addEventListener('click', () => {
+    if (currentGame !== 'realTalk') return;
+
+    const answer = answerInput.value.trim();
+    if (answer === '') {
+      alert('Please type your answer before submitting!');
+      return;
+    }
+
+    if (husbandTurn) {
+      addResponse('Husband', realTalkQuestions.husband[husbandQuestionIndex], answer);
+      husbandQuestionIndex++;
+      if (husbandQuestionIndex >= realTalkQuestions.husband.length) {
+        husbandQuestionIndex = 0;
+      }
+    } else {
+      addResponse('Wife', realTalkQuestions.wife[wifeQuestionIndex], answer);
+      wifeQuestionIndex++;
+      if (wifeQuestionIndex >= realTalkQuestions.wife.length) {
+        wifeQuestionIndex = 0;
       }
     }
-  </script>
+
+    husbandTurn = !husbandTurn;
+    updateRealTalkTurn();
+  });
+
+  // Switch to Fun Game
+  funGameBtn.addEventListener('click', () => {
+    currentGame = 'funGame';
+    title.textContent = "Fun Couples Game 🎲";
+    turnIndicator.textContent = "";
+    questionElem.style.minHeight = 'auto';
+    answerInput.style.display = 'none';
+    submitBtn.style.display = 'none';
+    funGameBtn.style.display = 'none';
+    realTalkBtn.style.display = 'inline-block';
+    responsesDiv.innerHTML = '';
+    funGameIndex = 0;
+    updateFunGameQuestion();
+  });
+
+  // Switch to Real Talk
+  realTalkBtn.addEventListener('click', () => {
+    currentGame = 'realTalk';
+    title.textContent = "Couples Real Talk 💕";
+    questionElem.style.minHeight = '80px';
+    funGameBtn.style.display = 'inline-block';
+    realTalkBtn.style.display = 'none';
+
+    // Remove fun options buttons if any
+    const oldOptions = document.getElementById('fun-options');
+    if (oldOptions) oldOptions.remove();
+
+    responsesDiv.innerHTML = '';
+    husbandTurn = true;
+    husbandQuestionIndex = 0;
+    wifeQuestionIndex = 0;
+    updateRealTalkTurn();
+    answerInput.style.display = 'block';
+    submitBtn.style.display = 'inline-block';
+  });
+
+  // Copy phone number on click
+  phoneNumberElem.addEventListener('click', () => {
+    const number = phoneNumberElem.textContent.trim();
+    navigator.clipboard.writeText(number).then(() => {
+      copyFeedback.style.display = 'inline';
+      setTimeout(() => {
+        copyFeedback.style.display = 'none';
+      }, 2000);
+    }).catch(() => {
+      alert('Failed to copy the number. Please copy manually.');
+    });
+  });
+
+  // Init real talk on load
+  updateRealTalkTurn();
+
+  // Initialize Adsense ads
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </body>
 </html>
